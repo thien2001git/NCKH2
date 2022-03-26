@@ -35,14 +35,25 @@
     }
 
     .usr {
-        
+
         text-align: right;
+    }
+
+    .si {
+        height: 500px;
+    }
+
+    .main {
+        background-color: #f9f9f9;
     }
 </style>
 {% endblock %}
 {% block content %}
 <div class="container-md">
     <div class="main" id="main">
+        <div class="si">
+
+        </div>
         {% for i in mess%}
         {% if i.type == SYS %}
         <div>
@@ -87,6 +98,8 @@
         $(".w80").width($(".container-md").width() - $(".w20").width())
         $("#mess").outerWidth($(".w80").width())
         $("#main").css("overflow-y", "scroll")
+        var element = document.getElementById("main");
+        element.scrollTop = element.scrollHeight;
     })
 
 </script>

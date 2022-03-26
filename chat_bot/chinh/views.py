@@ -74,7 +74,7 @@ def chat(req, idu):
 
         ss.append(j)
         s1 = "@@".join(ss)
-
+        # update  
         Usr.objects.filter(id=idu).update(mes=s1)
     
     u = Usr.objects.get(id=idu)
@@ -82,3 +82,8 @@ def chat(req, idu):
     ctx = {'tit': "Chat", 'text':"index", "imgs": imgs, "mess": me1, "SYS": SYS, "USR": USR, "uavt": u.avt.img}
     return render(req, 'chinh/chat_bot/index.html', ctx)
     
+
+
+def ad_signin(req):
+    ctx = {'tit': "Chat"}
+    return render(req, 'chinh/admin/signin.html', ctx)
