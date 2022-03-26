@@ -9,3 +9,5 @@ python3 manage.py createsuperuser
 python3 -m pip install Pillow
 python3 manage.py makemigrations chinh
 python3 manage.py sqlmigrate chinh 0001
+python3 manage.py migrate
+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

@@ -1,0 +1,93 @@
+{% extends "chinh/layout/layout2.html" %}
+{% block title %}
+<title>{{tit}}</title>
+<style>
+    * {
+        margin: 0px;
+        padding-top: 0%;
+        padding-bottom: 0%;
+    }
+
+    .form-chat {
+
+        /* bottom: 10px; */
+        border: 0px;
+        border-radius: 0px;
+        height: 50px;
+    }
+
+    .form-control {}
+
+    td {
+        padding: 0px;
+
+    }
+
+    .box {
+        background-color: #f3f3f3;
+        border-radius: 18px;
+        padding: 5px;
+        display: inline-block;
+    }
+
+    .sm {
+        font-size: 10px;
+    }
+
+    .usr {
+        
+        text-align: right;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="container-md">
+    <div class="main" id="main">
+        {% for i in mess%}
+        {% if i.type == SYS %}
+        <div>
+            <img src="/media/{{ imgs.5.img }}" height="64" alt="chat">
+            <span class="box">{{ i.data }}</span>
+            <div class="sm">{{ i.date }}</div>
+        </div>
+        {% else %}
+        <div class="usr">
+            <span class="box">{{ i.data }}</span>
+            <img src="/media/{{ uavt }}" height="64" alt="chat">
+            <div class="sm">{{ i.date }}</div>
+        </div>
+        {% endif %}
+
+        {% endfor %}
+    </div>
+    <div class="" id="chat">
+        <form action="" method="post" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+
+            <div>
+                <table>
+                    <tr class="w100">
+                        <td class="w80"><input class="form-chat" type="text" name="mess" id="mess"
+                                placeholder="Nhập gì đó" /></td>
+                        <td class="w20"><button type="submit" class="btn"><img src="/media/{{ imgs.4.img }}"
+                                    alt="send"></button></td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#chat").height("50px")
+        $("#main").height($(window).height() - $(".navbar").outerHeight() - $("#chat").height())
+        $(".w100").width($(".container-md").width())
+        $(".w80").width($(".container-md").width() - $(".w20").width())
+        $("#mess").outerWidth($(".w80").width())
+        $("#main").css("overflow-y", "scroll")
+    })
+
+</script>
+{% endblock %}

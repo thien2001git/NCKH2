@@ -1,1 +1,3 @@
-{%  %} {% endblock %}
+{% for %} {% endblock %}
+{% for %} {% endfor %}
+{% if %} {% endif %}
