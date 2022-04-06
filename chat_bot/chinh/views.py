@@ -4,6 +4,9 @@ from django.shortcuts import render
 from datetime import datetime
 from .models import *
 import json
+import os
+
+
 
 from collections import namedtuple
 from json import JSONEncoder
@@ -87,3 +90,7 @@ def chat(req, idu):
 def ad_signin(req):
     ctx = {'tit': "Chat"}
     return render(req, 'chinh/admin/signin.html', ctx)
+
+def ad_dashboard(req, id:int):
+    ctx = {'tit': "Chat"}
+    return render(req, 'chinh/admin/index.html', ctx)

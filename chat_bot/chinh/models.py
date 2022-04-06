@@ -1,4 +1,5 @@
 # from tkinter import Image
+from operator import mod
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -13,4 +14,11 @@ class Usr(models.Model):
     avt = models.ForeignKey(Images, on_delete=models.CASCADE, null=True)
     ip = models.CharField(max_length=60, null=True)
     mes = models.TextField(null=True)
+    data = models.TextField(null=True)
+
+class Label(models.Model):
+    nm = models.TimeField(null=True)
+
+class Cau(models.Model):
+    lb = models.ForeignKey(Label, null=True, on_delete=models.CASCADE)
     data = models.TextField(null=True)

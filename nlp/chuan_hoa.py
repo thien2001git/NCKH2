@@ -79,10 +79,10 @@ if __name__=="__main__":
     col1 = 'problem'
     col2 = 'label'
     test_percent = 0.2
-    df = pd.read_csv("train-data.csv", delimiter="-")
+    df = pd.read_csv("raw_data.csv", delimiter="-")
     nn =  NPL1()
     df[col1] = nn.nlp(df[col1]) 
-
+    df.to_csv("da_chuan_hoa.csv")
     # tách để train và test
     X_train, X_test, y_train, y_test = train_test_split(df[col1], df[col2], test_size=test_percent, random_state=42)
     
@@ -98,30 +98,6 @@ if __name__=="__main__":
     df1.to_csv("test.csv")
 
     # mã hóa tiêu đề 
-    label_encoder = LabelEncoder()
-    label_encoder.fit(y_train)
-    # print(list(label_encoder.classes_), '\n')
-    y_train = label_encoder.transform(y_train)
-    y_test = label_encoder.transform(y_test)
-
-    # Huân luyện
-    start_time = time.time()
-    text_clf = Pipeline([('vect', CountVectorizer(ngram_range=(1,1),
-                                                max_df=0.8,
-                                                max_features=None)), 
-                        ('tfidf', TfidfTransformer()), 
-                        ('clf', MultinomialNB())
-                        ])
-    # huấn luyện
-    text_clf = text_clf.fit(X_train, y_train)
-    train_time = time.time() - start_time
-    print('Done training Naive Bayes in', train_time, 'seconds.')
     
-    # lưu lại dùng sau
-    pickle.dump(text_clf, open("naive_bayes.pkl", 'wb'))
-
-    kq = text_clf.predict(X_test)
-    print(kq)
-    print(y_test)
 
     pass
