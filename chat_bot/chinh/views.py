@@ -8,6 +8,7 @@ import json
 import os
 from django.conf import settings
 from chinh.nlp.chuan_hoa import NLP1
+from chinh.models_them.Mess import Mess
 import pickle as pk
 from collections import namedtuple
 from json import JSONEncoder
@@ -15,17 +16,9 @@ from json import JSONEncoder
 SYS = 1
 USR = 2
 
-class Mess:
-    def __init__(self, type, data, date: datetime) -> None:
-        self.type = type
-        # self.id = id
-        self.data = data
-        self.date = date
-    def __str__(self) -> str:
-        return "messObj(type={}, data={}, date={})".format(self.type, self.data, self.date)
 
-def customDecoder(studentDict):
-    return namedtuple('X', studentDict.keys())(*studentDict.values())
+
+
 
 
 
@@ -60,12 +53,9 @@ def chat(req, idu):
     u = Usr.objects.get(id=idu)
     print(settings.BASE_DIR)
     # lấy các đoạn hội thoại 
-    ss = u.mes.split("@@")
-    me1 = []
-    for i in ss:
-        me = json.loads(i)
-        ume = Mess(me['type'], me['data'], me['date'])
-        me1.append(ume)
+    
+    me1 = json.loads(u.mes)
+    
     
     # người dùng gửi 
     if req.method == "POST":
@@ -73,14 +63,11 @@ def chat(req, idu):
         t = datetime.now()        
         m = req.POST['mess'].replace("@", "/@")
         mess = Mess(USR,m,t.strftime("%d-%M-%Y %H:%M:%S"))
-        j = json.dumps(mess.__dict__)
 
-        me1.append(mess)
-
-        ss.append(j)
-        s1 = "@@".join(ss)
+        # thêm vào mảng
+        me1.append(mess.__dict__)
         # update  
-        Usr.objects.filter(id=idu).update(mes=s1)
+        Usr.objects.filter(id=idu).update(mes=json.dumps(me1))
         # Chuẩn hóa mess
         n = NLP1()
         c = n.nlp_str(m)
