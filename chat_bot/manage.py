@@ -2,7 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+# from chinh.nlp.chuan_hoa import NLP1
 
 def main():
     """Run administrative tasks."""

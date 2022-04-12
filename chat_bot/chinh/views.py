@@ -1,3 +1,4 @@
+from copyreg import pickle
 from typing import Dict
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -5,9 +6,9 @@ from datetime import datetime
 from .models import *
 import json
 import os
-
-
-
+from django.conf import settings
+from chinh.nlp.chuan_hoa import NLP1
+import pickle as pk
 from collections import namedtuple
 from json import JSONEncoder
 
@@ -57,7 +58,7 @@ def chat(req, idu):
 
     # lấy người dùng
     u = Usr.objects.get(id=idu)
-    
+    print(settings.BASE_DIR)
     # lấy các đoạn hội thoại 
     ss = u.mes.split("@@")
     me1 = []
@@ -70,7 +71,8 @@ def chat(req, idu):
     if req.method == "POST":
         # tạo đt mess mới
         t = datetime.now()        
-        mess = Mess(USR,req.POST['mess'],t.strftime("%d-%M-%Y %H:%M:%S"))
+        m = req.POST['mess'].replace("@", "/@")
+        mess = Mess(USR,m,t.strftime("%d-%M-%Y %H:%M:%S"))
         j = json.dumps(mess.__dict__)
 
         me1.append(mess)
@@ -79,7 +81,16 @@ def chat(req, idu):
         s1 = "@@".join(ss)
         # update  
         Usr.objects.filter(id=idu).update(mes=s1)
-    
+        # Chuẩn hóa mess
+        n = NLP1()
+        c = n.nlp_str(m)
+        # load naive bayes đã huấn luyện
+        f = open(os.path.join(settings.BASE_DIR, "phan_loai.pkl"), "rb")
+        nb = pk.load(f)
+        # Sử dụng ai đã huấn luyện
+        kq = nb.predict([c])
+        print(kq)
+
     u = Usr.objects.get(id=idu)
     
     ctx = {'tit': "Chat", 'text':"index", "imgs": imgs, "mess": me1, "SYS": SYS, "USR": USR, "uavt": u.avt.img}

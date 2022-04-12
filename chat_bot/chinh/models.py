@@ -18,6 +18,7 @@ class Usr(models.Model):
 
 class Label(models.Model):
     nm = models.TimeField(null=True)
+    res = models.TextField(null=True)
 
 class Cau(models.Model):
     lb = models.ForeignKey(Label, null=True, on_delete=models.CASCADE)
