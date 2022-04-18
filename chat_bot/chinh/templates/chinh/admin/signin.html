@@ -27,11 +27,20 @@
                 <td><label for="password">Mật khẩu</label></td>
                 <td><input type="password" name="password" id="password"></td>
             </tr>
+            {% if mess %} 
+            <tr>
+                <td colspan="2">{{ mess }}</td>
+            </tr>
+            {% endif %}
             <tr>
                 <td colspan="2">
                     <button type="submit">Đăng nhập</button>
+                    <button type="reset">Xóa form</button>
+
                 </td>
             </tr>
+           
+            
         </table>
     </form>
 </body>

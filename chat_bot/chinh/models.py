@@ -14,13 +14,13 @@ class Usr(models.Model):
     ref = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     mk = models.TextField(null=True)
     avt = models.ForeignKey(Images, on_delete=models.CASCADE, null=True)
-    ip = models.CharField(max_length=60, null=True)
+    ip = models.TextField(null=True)
     mes = models.TextField(null=True)
     data = models.TextField(null=True)
     upd_str = models.TextField(null=True)
 
 class Label(models.Model):
-    nm = models.TimeField(null=True)
+    nm = models.TextField(null=True)
     value = models.IntegerField(null=True)
     res = models.TextField(null=True)
     upd_str = models.TextField(null=True)
