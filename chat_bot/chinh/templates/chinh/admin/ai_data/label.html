@@ -1,1 +1,183 @@
 {% extends "chinh/layout/layout1.html" %}
+{% block title %}<title>{{tit}}</title> {% endblock %}
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent1"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+                <li class="nav-item">
+                    <a href="/ad">Trang chủ </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/ad/ai_data/label">> Label</a>
+                </li>
+                
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent2"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+                <li class="nav-item">
+                    <button id="add_csv" class="btn btn-primary" href="#">Thêm bằng file csv</button>
+                </li>
+                <li class="nav-item">
+                    <button id="add_one" class="btn btn-primary" href="#">Thêm 1 đối tượng</button>
+                </li>
+                
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<script>
+    // status
+    let st = 0;
+</script>
+<table id="tbl-show" class="table">
+    <tr>
+        <th>Id</th>
+        <th>Tên</th>
+        <th>Giá trị training</th>
+        <th>Cách phản hồi</th>
+        <th>Ngày cập nhật</th>
+        <th>Ngày tạo</th>
+    </tr>
+
+    {% for i in tb %}
+    <tr>
+        <td>{{i.id}}</td>
+        <td>{{i.nm}}</td>
+        <td>{{i.value}}</td>
+        <td>{{i.res}}</td>
+        <td>{{i.upd}}</td>
+        <td>{{i.cr}}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+<div id="add_csv_form">
+    <!-- form add csv -->
+    <form action="#" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- lưu ý nhỏ -->
+        <h3>Lưu ý</h3>
+        <ol>
+            <li>file phải có 2 trường là label và code</li>
+        </ol>
+        <table class="table">
+            <!-- gửi file -->
+            <tr>
+                <th><label for="f">Gửi file</label></th>
+                <td>
+                    <input type="file" name="f" id="f">
+                    <!-- thông báo khi sai -->
+                    {% if mess %}
+                    <div>{{mess}}</div>
+                    <script>
+                        // ẩn bảng, hiện from thêm
+                        st = 1;
+                        $("#add_csv_form").show()
+                        $("#tbl-show").hide()
+
+                    </script>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <!-- nút cơ bản -->
+                <td colspan="2">
+                    <button type="submit">Lưu</button>
+                    <button type="reset">Reset</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div id="add_one_form">
+    <!-- form add csv -->
+    <form action="#" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        
+        <table class="table">
+            <!-- gửi đối tượng mới -->
+            <tr>
+                <th><label for="f">Tên</label></th>
+                <td>
+                    <input type="text" name="ten" id="ten">
+        
+                </td>
+            </tr>
+            <tr>
+                <th><label for="co">Mã để training</label></th>
+                <td>
+                    <input type="number" name="co" id="co">
+                    
+                </td>
+            </tr>
+            <tr>
+                <th><label for="ph">Cách phản hồi</label></th>
+                <td>
+                    <input type="text" name="ph" id="ph">
+                </td>
+            </tr>
+            <tr>
+                <!-- thông báo khi sai -->
+                {% if mess %}
+                <div>{{mess}}</div>
+                <script>
+                    // ẩn bảng, hiện from thêm
+                    st = 2;
+                    $("#add_csv_form").hide()
+                    $("#add_one_form").show()
+                    $("#tbl-show").hide()
+
+                </script>
+                {% endif %}
+                <!-- nút cơ bản -->
+                <td colspan="2">
+                    <button type="submit">Lưu</button>
+                    <button type="reset">Reset</button>
+                </td>
+            </tr>
+        </table>
+        
+    </form>
+</div>
+<script>
+    // nếu status == 0 thì ẩn form
+    if (st == 0) {
+        $("#add_csv_form").hide()
+        $("#add_one_form").hide()
+    }
+    // nếu ấn nút thêm sẽ ẩn bảng
+    $("#add_csv").click(function (ev) {
+        $("#add_csv_form").show()
+        $("#add_one_form").hide()
+        $("#tbl-show").hide()
+    })
+    $("#add_one").click(function (ev) {
+        $("#add_csv_form").hide()
+        $("#add_one_form").show()
+        $("#tbl-show").hide()
+    })
+</script>
+{% endblock %}

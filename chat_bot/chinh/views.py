@@ -1,9 +1,9 @@
 from copyreg import pickle
 from typing import Dict
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from datetime import datetime
-
+import pandas as pd
 # from pc import UpdateStr
 from .models import *
 import json
@@ -19,7 +19,7 @@ from django.contrib.auth.hashers import PBKDF2PasswordHasher
 from django.contrib.auth.hashers import check_password
 SYS = 1
 USR = 2
-
+# các hàm dùng chung
 # lấy ip
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -37,7 +37,11 @@ def updstr(s:str):
         a.append(m)
     return a
 
-
+# hàm kiểm tra session dùng chung
+def ckc(req):
+    if 'id' in req.session:
+        print(req.session['id'])
+        return redirect('ad_dashboard', id=int(req.session['id']))
 
 
 # Create your views here.
@@ -101,14 +105,15 @@ def chat(req, idu):
     
     ctx = {'tit': "Chat", 'text':"index", "imgs": imgs, "mess": me1, "SYS": SYS, "USR": USR, "uavt": u.avt.img}
     return render(req, 'chinh/chat_bot/index.html', ctx)
-    
+
 
 
 def ad_signin(req):
     ctx = {'tit': "Đăng nhập"}
     # kiểm tra session
-    if req.session.get_expiry_age() > 0:
-        return ad_dashboard(req, req.session["id"])
+    if 'id' in req.session:
+        return redirect('ad_dashboard', id=int(req.session['id']))
+    
     if req.method == "POST":
         # lấy thông tin đăng nhập
         info = {"user_name": req.POST["user_name"], "password": req.POST["password"]}
@@ -119,13 +124,15 @@ def ad_signin(req):
             if check_password(info["password"], u[0].password):
                 # nếu là admin
                 if u[0].is_superuser:
+                    # print(u[0])
                     # cập nhật lần cuối đăng nhập
                     User.objects.filter(id=u[0].id).update(last_login=datetime.now())
                     # tạo session
                     req.session["id"] = u[0].id
                     req.session["password"] = u[0].password
+                    req.session["type"] = "admin"
                     req.session.set_expiry(60*18*60)
-                    return ad_dashboard(req, u[0].id)
+                    return redirect('ad_dashboard', id=int(req.session['id']))
                 # nếu là nhân viên
                 elif u[0].is_staff:
                     # cập nhật lần cuối đăng nhập
@@ -133,9 +140,10 @@ def ad_signin(req):
                     # tạo session
                     req.session["id"] = u[0].id
                     req.session["password"] = u[0].password
+                    req.session["type"] = "staff"
                     req.session.set_expiry(60*18*60)
                     User.objects.filter(id=u[0].id).update(last_login=datetime.now())
-                    return ad_dashboard(req, u[0].id)
+                    return redirect('ad_dashboard', id=int(req.session['id']))
                 # nếu là khách
                 else:
                     return error_403(req, "No")
@@ -158,13 +166,16 @@ def view_all(req):
 
 # xem dữ liệu
 def data(req):
-    ctx = {'tit': "Dữ liệu"}
+    # kiểm tra sesion
+
+    ctx = {'tit': "Quản lý các câu của người dùng"}
+    # lấy đối tượng trong bảng cau
     c = list(Cau.objects.all())
     tb = []
     for i in c:
-        cc = dict()
+        # gán vào dict
+        cc = dict(i.__dict__)
         a = updstr(i.upd_str)
-        cc = i.__dict__
         cc["lb"] = i.lb.nm
         cc["cr"] = a[0].thoi_gian
         cc["upd"] = a[-1].thoi_gian
@@ -172,10 +183,45 @@ def data(req):
     ctx["cau"] = tb
     # print(tb)
     if req.method == "POST":
-        print(req.FILES)
-
+        # nếu admin thêm bằng file
+        dt = pd.read_csv(req.FILES['f'])
+        # nếu không có các trường đã đưa
+        if 'problem' not in dt or 'label' not in dt:
+            ctx["mess"] = "File bạn tải lên không đúng"
+        # thêm vào model
+        else:
+            for i in range(len(dt['problem'])):
+                # gán
+                pr = dt["problem"][i]
+                lb = dt["label"][i]
+                # kiểm tra
+                uu = UpdateStr(req.session['id'], "thêm", datetime.now())
+                if pr != None and lb != None:
+                    # tạo mới đối tượng
+                    cau = Cau()
+                    cau.lb = Label.objects.get(id=lb)
+                    cau.data = pr
+                    cau.upd_str = uu
+                    cau.save()
 
     return render(req, 'chinh/admin/ai_data/data.html', ctx)
+
+
 def label(req):
-    ctx = {'tit': "Bảng chính"}
+    # kiểm tra sesion
+
+    ctx = {'tit': "Quản lý các label"}
+    # lấy đối tượng
+    lb = list(Label.objects.all())
+    tb = []
+    for i in lb:
+        d = dict(i.__dict__)
+        # lấy các giá trị update
+        a = updstr(i.upd_str)
+        d["cr"] = a[0].thoi_gian
+        d["upd"] = a[-1].thoi_gian
+        tb.append(d)
+    
+    ctx["tb"] = tb
+    print(tb)    
     return render(req, 'chinh/admin/ai_data/label.html', ctx)

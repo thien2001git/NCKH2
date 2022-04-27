@@ -4,6 +4,7 @@ django-admin startproject chat_bot
 cd chat_bot
 python3 manage.py migrate
 python3 manage.py startapp chinh
+cd chat_bot
 python3 manage.py runserver 3000
 python3 manage.py createsuperuser
 python3 -m pip install Pillow
