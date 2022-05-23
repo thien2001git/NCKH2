@@ -1,0 +1,74 @@
+[
+  {
+    "text": "em muốn đăng ký",
+    "intent": "dat_lich",
+    "intent_prediction": {
+      "name": "dang_ky",
+      "confidence": 0.737575113773346
+    }
+  },
+  {
+    "text": "đội ngũ cán bộ giáo viên khoa điện",
+    "intent": "giao_vien_khoa_dien_dien_tu",
+    "intent_prediction": {
+      "name": "giao_vien_khoa_tin",
+      "confidence": 0.3123725354671478
+    }
+  },
+  {
+    "text": "có ký túc xá không",
+    "intent": "gioi_thieu_ktx",
+    "intent_prediction": {
+      "name": "khu_KTX",
+      "confidence": 0.30624908208847046
+    }
+  },
+  {
+    "text": "Đối tượng 01",
+    "intent": "doi_tuong_uu_tien_02",
+    "intent_prediction": {
+      "name": "doi_tuong_uu_tien_03",
+      "confidence": 0.4183811545372009
+    }
+  },
+  {
+    "text": "Đối tượng 02",
+    "intent": "doi_tuong_uu_tien_02",
+    "intent_prediction": {
+      "name": "doi_tuong_uu_tien_03",
+      "confidence": 0.4183811545372009
+    }
+  },
+  {
+    "text": "Đối tượng 03",
+    "intent": "doi_tuong_uu_tien_02",
+    "intent_prediction": {
+      "name": "doi_tuong_uu_tien_03",
+      "confidence": 0.4183811545372009
+    }
+  },
+  {
+    "text": "Đối tượng 08",
+    "intent": "doi_tuong_uu_tien_04",
+    "intent_prediction": {
+      "name": "doi_tuong_uu_tien_03",
+      "confidence": 0.4183811545372009
+    }
+  },
+  {
+    "text": "Đối tượng 09",
+    "intent": "doi_tuong_uu_tien_04",
+    "intent_prediction": {
+      "name": "doi_tuong_uu_tien_03",
+      "confidence": 0.4183811545372009
+    }
+  },
+  {
+    "text": "Đối tượng 10",
+    "intent": "doi_tuong_uu_tien_04",
+    "intent_prediction": {
+      "name": "doi_tuong_uu_tien_03",
+      "confidence": 0.4183811545372009
+    }
+  }
+]

@@ -171,6 +171,9 @@ def data(req):
     ctx = {'tit': "Quản lý các câu của người dùng"}
     # lấy đối tượng trong bảng cau
     c = list(Cau.objects.all())
+    # lấy đối tượng trong bảng label
+    l = list(Label.objects.all())
+    ctx["label"] = l
     tb = []
     for i in c:
         # gán vào dict
@@ -184,25 +187,32 @@ def data(req):
     # print(tb)
     if req.method == "POST":
         # nếu admin thêm bằng file
-        dt = pd.read_csv(req.FILES['f'])
-        # nếu không có các trường đã đưa
-        if 'problem' not in dt or 'label' not in dt:
-            ctx["mess"] = "File bạn tải lên không đúng"
-        # thêm vào model
-        else:
-            for i in range(len(dt['problem'])):
-                # gán
-                pr = dt["problem"][i]
-                lb = dt["label"][i]
-                # kiểm tra
-                uu = UpdateStr(req.session['id'], "thêm", datetime.now())
-                if pr != None and lb != None:
-                    # tạo mới đối tượng
-                    cau = Cau()
-                    cau.lb = Label.objects.get(id=lb)
-                    cau.data = pr
-                    cau.upd_str = uu
-                    cau.save()
+        if req.POST["kieu"] == "file":
+            # nếu không có file
+            if len(req.FILES) <= 0:
+                ctx["mess"] = "hãy nhập file dạng csv"
+                return render(req, 'chinh/admin/ai_data/data.html', ctx)
+            dt = pd.read_csv(req.FILES['f'])
+            # nếu không có các trường đã đưa
+            if 'problem' not in dt or 'label' not in dt:
+                ctx["mess"] = "File bạn tải lên không đúng"
+            # thêm vào model
+            else:
+                for i in range(len(dt['problem'])):
+                    # gán
+                    pr = dt["problem"][i]
+                    lb = dt["label"][i]
+                    # kiểm tra
+                    uu = UpdateStr(req.session['id'], "thêm", datetime.now())
+                    if pr != None and lb != None:
+                        # tạo mới đối tượng
+                        cau = Cau()
+                        cau.lb = Label.objects.get(id=lb)
+                        cau.data = pr
+                        cau.upd_str = uu
+                        cau.save()
+            if req.POST["kieu"] == "one":
+                pass
 
     return render(req, 'chinh/admin/ai_data/data.html', ctx)
 

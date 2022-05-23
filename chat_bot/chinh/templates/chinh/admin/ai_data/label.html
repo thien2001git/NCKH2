@@ -18,7 +18,7 @@
                 <li class="nav-item">
                     <a href="/ad/ai_data/label">> Label</a>
                 </li>
-                
+
             </ul>
 
         </div>
@@ -41,7 +41,7 @@
                 <li class="nav-item">
                     <button id="add_one" class="btn btn-primary" href="#">Thêm 1 đối tượng</button>
                 </li>
-                
+
             </ul>
 
         </div>
@@ -51,32 +51,54 @@
     // status
     let st = 0;
 </script>
-<table id="tbl-show" class="table">
-    <tr>
-        <th>Id</th>
-        <th>Tên</th>
-        <th>Giá trị training</th>
-        <th>Cách phản hồi</th>
-        <th>Ngày cập nhật</th>
-        <th>Ngày tạo</th>
-    </tr>
+<div id="tbl-show">
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Id</th>
+            <th>Tên</th>
+            <th>Giá trị training</th>
+            <th>Cách phản hồi</th>
+            <th>Ngày cập nhật</th>
+            <th>Ngày tạo</th>
+            <th>Hành động</th>
+        </tr>
 
-    {% for i in tb %}
-    <tr>
-        <td>{{i.id}}</td>
-        <td>{{i.nm}}</td>
-        <td>{{i.value}}</td>
-        <td>{{i.res}}</td>
-        <td>{{i.upd}}</td>
-        <td>{{i.cr}}</td>
-    </tr>
-    {% endfor %}
+        {% for i in tb %}
+        <tr>
+            <td><input type="checkbox" name="chon" data-id="{{i.id}}" data-nm="{{i.nm}}" data-value="{{i.value}}"
+                    data-res="{{i.res}}"></td>
+            <td >{{i.id}}</td>
+            <td contenteditable="true">{{i.nm}}</td>
+            <td contenteditable="true" class="only_numbers">{{i.value}}</td>
+            <td contenteditable="true">{{i.res}}</td>
+            <td>{{i.upd}}</td>
+            <td>{{i.cr}}</td>
+            <td>
+                <button onclick="makeInput()" data-id="{{i.id}}" data-nm="{{i.nm}}" data-value="{{i.value}}" data-res="{{i.res}}" class="upd">Sửa</button>
+                <button data-id="{{i.id}}" data-nm="{{i.nm}}" data-value="{{i.value}}" data-res="{{i.res}}"
+                    class="del">Xóa</button>
+            </td>
+        </tr>
+        {% endfor %}
 
-</table>
+    </table>
+  
+    <div>
+        <span>Với các đối label đã chọn</span>
+        <select name="hd" id="hd">
+            <option value="del">Xóa</option>
+            <option value="del">Tải xuống</option>
+            <option value="del">Cập nhật</option>
+        </select>
+        <button>Xác nhận</button>
+    </div>
+</div>
 <div id="add_csv_form">
     <!-- form add csv -->
     <form action="#" method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <input type="hidden" name="kieu" value="add_csv">
         <!-- lưu ý nhỏ -->
         <h3>Lưu ý</h3>
         <ol>
@@ -88,19 +110,24 @@
                 <th><label for="f">Gửi file</label></th>
                 <td>
                     <input type="file" name="f" id="f">
-                    <!-- thông báo khi sai -->
-                    {% if mess %}
-                    <div>{{mess}}</div>
-                    <script>
-                        // ẩn bảng, hiện from thêm
-                        st = 1;
-                        $("#add_csv_form").show()
-                        $("#tbl-show").hide()
 
-                    </script>
-                    {% endif %}
                 </td>
             </tr>
+            <!-- thông báo khi sai -->
+            {% if mess %}
+            <tr>
+                <td colspan="2">
+                    <div>{{mess}}</div>
+                </td>
+            </tr>
+            <script>
+                // ẩn bảng, hiện from thêm
+                st = 1;
+                $("#add_csv_form").show()
+                $("#tbl-show").hide()
+
+            </script>
+            {% endif %}
             <tr>
                 <!-- nút cơ bản -->
                 <td colspan="2">
@@ -112,25 +139,25 @@
     </form>
 </div>
 <div id="add_one_form">
-    <!-- form add csv -->
+    <!-- form add 1 object -->
     <form action="#" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        
-        
+        <input type="hidden" name="kieu" value="add_one">
+
         <table class="table">
             <!-- gửi đối tượng mới -->
             <tr>
                 <th><label for="f">Tên</label></th>
                 <td>
                     <input type="text" name="ten" id="ten">
-        
+
                 </td>
             </tr>
             <tr>
                 <th><label for="co">Mã để training</label></th>
                 <td>
                     <input type="number" name="co" id="co">
-                    
+
                 </td>
             </tr>
             <tr>
@@ -159,25 +186,51 @@
                 </td>
             </tr>
         </table>
-        
+
     </form>
 </div>
+
 <script>
     // nếu status == 0 thì ẩn form
     if (st == 0) {
-        $("#add_csv_form").hide()
-        $("#add_one_form").hide()
+        show_hide([], ["#add_one_form", "#add_csv_form"])
+    }
+    if (st == 1) {
+        show_hide(["#add_csv_form"], ["#add_one_form", "#tbl-show"])
+    }
+    if (st == 2) {
+        show_hide(["#add_one_form"], ["#add_csv_form", "#tbl-show"])
     }
     // nếu ấn nút thêm sẽ ẩn bảng
     $("#add_csv").click(function (ev) {
-        $("#add_csv_form").show()
-        $("#add_one_form").hide()
-        $("#tbl-show").hide()
+        show_hide(["#add_csv_form"], ["#add_one_form", "#tbl-show"])
     })
     $("#add_one").click(function (ev) {
-        $("#add_csv_form").hide()
-        $("#add_one_form").show()
-        $("#tbl-show").hide()
+        show_hide(["#add_one_form"], ["#add_csv_form", "#tbl-show"])
     })
+
+    function thong_bao(ev, str) {
+        return confirm(str)
+    }
+
+    $(".del").click(function (ev) {
+        let x = thong_bao(ev, "Bạn đã chắc xóa chưa")
+        if (x == true) {
+
+        } else {
+
+        }
+    })
+    $(".upd").click(function (ev) {
+        let x = thong_bao(ev, "Bạn đã chắc muốn sửa chưa")
+        if (x == true) {
+
+        } else {
+
+        }
+    })
+    $(".only_numbers").keypress(function(e) {
+        if (isNaN(String.fromCharCode(e.which))) e.preventDefault();
+    });
 </script>
 {% endblock %}

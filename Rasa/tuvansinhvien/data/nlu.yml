@@ -1,0 +1,780 @@
+version: "2.0"
+nlu:
+- intent: chao_hoi
+  examples: |
+    - hello
+    - hi
+    - xin chào
+    - allo
+    - cho em hỏi
+    - chào cô
+    - chào thầy
+- intent: dang_ky
+  examples: |
+    - Em muốn đăng ký
+    - đăng ký
+    - em muốn tư vấn
+    - em muốn đăng ký tư vấn
+    - Thầy có thể đăng ký cho em được không?
+- intent: name
+  examples: |
+    - [Nguyễn Văn Anh]{"entity": "name", "role": "name", "group": "thong_tin_nguoi_dung"}
+    - [Bùi Văn Nam]{"entity": "name", "role": "name", "group": "thong_tin_nguoi_dung"}
+    - [Đinh Công Bình]{"entity": "name", "role": "name", "group": "thong_tin_nguoi_dung"}
+    - [Trần Thu Trang]{"entity": "name", "role": "name", "group": "thong_tin_nguoi_dung"}
+    - [Đỗ Mạnh Hùng]{"entity": "name", "role": "name", "group": "thong_tin_nguoi_dung"}
+- intent: phone
+  examples: |
+    - [0912123123]{"entity": "phone", "role": "phone", "group": "thong_tin_nguoi_dung"}
+    - [0942727685]{"entity": "phone", "role": "phone", "group": "thong_tin_nguoi_dung"}
+    - [0987822454]{"entity": "phone", "role": "phone", "group": "thong_tin_nguoi_dung"}
+    - [0973283642]{"entity": "phone", "role": "phone", "group": "thong_tin_nguoi_dung"}
+    - [0912342189]{"entity": "phone", "role": "phone", "group": "thong_tin_nguoi_dung"}
+    - [0916113319]{"entity": "phone", "role": "phone", "group": "thong_tin_nguoi_dung"}
+- intent: email
+  examples: |
+    - [vidu@gmail.com]{"entity": "email", "role": "email", "group": "thong_tin_nguoi_dung"}
+    - [example@example.com]{"entity": "email", "role": "email", "group": "thong_tin_nguoi_dung"}
+    - [ramdom@gmail.com]{"entity": "email", "role": "email", "group": "thong_tin_nguoi_dung"}
+    - [dohung2511@gmail.com]{"entity": "email", "role": "email", "group": "thong_tin_nguoi_dung"}
+- intent: dat_lich
+  examples: |
+    - đặt lịch
+    - em muốn đăng ký
+    - đặt lịch cho em
+- intent: khong_dat_lich
+  examples: |
+    - không đặt lịch
+    - không muốn đặt lich
+    - ko đặt lịch
+- intent: tam_biet
+  examples: |
+    - tạm biệt thầy
+    - bye
+    - bye bye
+    - Tạm biệt
+- intent: robot
+  examples: |
+    - bạn là robot à?
+    - tổng đài trả lời tự động?
+    - em đang nói chuyện với robot?
+    - em đang nói chuyện với ai?
+- intent: xac_nhan
+  examples: |
+    - có
+    - đồng ý
+    - vâng
+    - ok
+    - được
+    - được chứ
+    - yes
+    - muốn
+    - dạ
+- intent: phu_nhan
+  examples: |
+    - không
+    - ko
+    - không được
+    - vậy thôi
+    - để lúc khác
+    - để sau
+    - hỏi sau
+    - thôi
+    - không cần
+- intent: menu_chinh
+  examples: |
+    - menu chính
+    - về menu chính
+    - tới menu chính
+- intent: cac_phong_ban
+  examples: |
+    - thông tin về các phòng ban
+    - trường có các phòng ban nào
+    - các phòng ban của trường
+- intent: phong_dao_tao
+  examples: |
+    - thông tin về phòng đào tạo
+    - em muốn biết thông tin về phòng đào tạo
+    - phòng đào tạo làm gì
+    - phòng đào tạo có những chức năng gì
+- intent: phong_to_chuc
+  examples: |
+    - thông tin về phòng tổ chức
+    - thông tin về phòng tổ chức hành chính
+    - em muốn biết thông tin về phòng tổ chức
+    - phòng tổ chức làm gì
+    - phòng tổ chức có những chức năng gì
+- intent: phong_CTHSSV
+  examples: |
+    - thông tin về phòng công tác học sinh sinh viên
+    - thông tin về phòng CTHSSV
+    - em muốn biết thông tin về phòng công tác học sinh sinh viên
+    - phòng công tác học sinh sinh viên làm gì
+    - phòng công tác học sinh sinh viên có những chức năng gì
+- intent: ban_tuyen_sinh
+  examples: |
+    - thông tin về ban tuyển sinh
+    - ban tuyển sinh là tư vấn tuyển sinh ạ
+    - em muốn biết thông tin về ban tuyển sinh
+    - ban tuyển sinh làm gì
+    - ban tuyển sinh có những chức năng gì
+- intent: ban_ke_hoach
+  examples: |
+    - thông tin về ban kế hoạch
+    - em muốn biết thông tin về ban kế hoạch
+    - ban kế hoạch làm gì
+    - ban kế hoạch có những chức năng gì
+- intent: cac_khoa_nghe
+  examples: |
+    - cho em hỏi về các khoa nghề
+    - các khoa của trường
+    - trường có các khoa nào
+    - các khoa nghề
+- intent: khoa_tin_hoc
+  examples: |
+    - cho em hỏi trường có khoa tin học không
+    - khoa tin học
+    - em muốn biết về khoa tin
+    - cho em thông tin về khoa tin học
+- intent: giao_vien_khoa_tin
+  examples: |
+    - giáo viên khoa tin
+    - thầy cô giáo khoa tin
+    - đội ngũ cán bộ giáo viên khoa tin
+    - khoa tin có những thầy cô nào
+    - khoa tin có những ai
+- intent: nhiem_vu_khoa_tin
+  examples: |
+    - nhiệm vụ khoa tin học
+    - khoa tin học có những nhiệm vụ gì
+- intent: lien_he_khoa_tin
+  examples: |
+    - liên hệ khoa tin
+    - số điện thoại khoa tin
+    - sđt khoa tin
+    - địa chỉ khoa tin
+- intent: hoat_dong_khoa_tin
+  examples: |
+    - hoạt động của khoa tin
+    - các hoạt động ngoại khoá của khoa tin
+    - hình ảnh khoa tin
+- intent: hoc_tap_khoa_tin
+  examples: |
+    - học tập khoa tin học
+    - hình ảnh học tập của khoa tin học
+    - học sinh trong giờ học khoa tin học
+    - sinh viên trong giờ học khoa tin học
+- intent: khoa_co_khi
+  examples: |
+    - cho em hỏi về khoa cơ khí
+    - trường có khoa cơ khí không
+    - khoa cơ khí
+    - em muốn biết về khoa cơ khí
+    - thông tin về khoa cơ khí
+- intent: giao_vien_khoa_co_khi
+  examples: |
+    - giáo viên khoa cơ khí
+    - thầy cô giáo khoa cơ khí
+    - đội ngũ cán bộ giáo viên khoa cơ khí
+    - khoa cơ khí có những thầy cô nào
+    - khoa cơ khí có những ai
+- intent: nhiem_vu_khoa_co_khi
+  examples: |
+    - nhiệm vụ khoa cơ khí
+    - khoa cơ khí có những nhiệm vụ gì
+- intent: lien_he_khoa_co_khi
+  examples: |
+    - liên hệ khoa cơ khí
+    - số điện thoại khoa cơ khí
+    - sđt khoa cơ khí
+    - địa chỉ khoa cơ khí
+- intent: hoat_dong_khoa_co_khi
+  examples: |
+    - hoạt động của khoa cơ khí
+    - các hoạt động ngoại khoá của khoa cơ khí
+    - hình ảnh khoa cơ khí
+- intent: hoc_tap_khoa_co_khi
+  examples: |
+    - học tập khoa cơ khí
+    - hình ảnh học tập của khoa cơ khí
+    - học sinh trong giờ học khoa cơ khí
+    - sinh viên trong giờ học khoa cơ khí
+- intent: khoa_dien_dien_tu
+  examples: |
+    - cho em hỏi về khoa điện
+    - cho em hỏi về khoa điện tử
+    - trường có khoa điện không
+    - khoa điện điện tử
+    - thông tin về khoa điện
+- intent: giao_vien_khoa_dien_dien_tu
+  examples: |
+    - giáo viên khoa điện
+    - thầy cô giáo khoa điện
+    - đội ngũ cán bộ giáo viên khoa điện
+    - khoa điện có những thầy cô nào
+    - khoa điện có những ai
+- intent: nhiem_vu_khoa_dien_dien_tu
+  examples: |
+    - nhiệm vụ khoa điện
+    - khoa điện học có những nhiệm vụ gì
+- intent: lien_he_khoa_dien_dien_tu
+  examples: |
+    - liên hệ khoa điện
+    - số điện thoại khoa điện
+    - sđt khoa điện
+    - địa chỉ khoa điện
+- intent: hoat_dong_khoa_dien_dien_tu
+  examples: |
+    - hoạt động của khoa điện
+    - các hoạt động ngoại khoá của khoa điện
+    - hình ảnh khoa điện
+- intent: hoc_tap_khoa_dien_dien_tu
+  examples: |
+    - học tập khoa điện
+    - hình ảnh học tập của khoa điện
+    - học sinh trong giờ học khoa điện
+    - sinh viên trong giờ học khoa điện
+- intent: khoa_kinh_te
+  examples: |
+    - cho em hỏi về khoa kinh tế
+    - cho em hỏi về khoa kế toán
+    - trường có khoa kinh tế không
+    - khoa kinh tế
+    - thông tin về khoa kinh tế
+    - thông tin về khoa kế toán
+- intent: giao_vien_khoa_kinh_te
+  examples: |
+    - giáo viên khoa kinh tế
+    - thầy cô giáo khoa kinh tế
+    - đội ngũ cán bộ giáo viên khoa kinh tế
+    - khoa kinh tế có những thầy cô nào
+    - khoa kinh tế có những ai
+- intent: nhiem_vu_khoa_kinh_te
+  examples: |
+    - nhiệm vụ khoa kinh tế
+    - khoa kinh tế học có những nhiệm vụ gì
+- intent: lien_he_khoa_kinh_te
+  examples: |
+    - liên hệ khoa kinh tế
+    - số điện thoại khoa kinh tế
+    - sđt khoa kinh tế
+    - địa chỉ khoa kinh tế
+- intent: hoat_dong_khoa_kinh_te
+  examples: |
+    - hoạt động của khoa kinh tế
+    - các hoạt động ngoại khoá của khoa kinh tế
+    - hình ảnh khoa kinh tế
+- intent: hoc_tap_khoa_kinh_te
+  examples: |
+    - học tập khoa kinh tế
+    - hình ảnh học tập của khoa kinh tế
+    - học sinh trong giờ học khoa kinh tế
+    - sinh viên trong giờ học khoa kinh tế
+- intent: khoa_hoc_co_ban
+  examples: |
+    - cho em hỏi về khoa học cơ bản
+    - cho em hỏi khoa cơ bản
+    - trường có khoa cơ bản không
+    - khoa học cơ bản
+    - khoa cơ bản
+    - thông tin về khoa học cơ bản
+    - thông tin về khoa cơ bản
+- intent: giao_vien_khoa_hoc_co_ban
+  examples: |
+    - giáo viên khoa học cơ bản
+    - thầy cô giáo khoa học cơ bản
+    - đội ngũ cán bộ giáo viên khoa học cơ bản
+    - khoa học cơ bản có những thầy cô nào
+    - khoa học cơ bản có những ai
+- intent: nhiem_vu_khoa_hoc_co_ban
+  examples: |
+    - nhiệm vụ khoa học cơ bản
+    - khoa học cơ bản học có những nhiệm vụ gì
+- intent: lien_he_khoa_hoc_co_ban
+  examples: |
+    - liên hệ khoa học cơ bản
+    - số điện thoại khoa học cơ bản
+    - sđt khoa học cơ bản
+    - địa chỉ khoa học cơ bản
+- intent: hoat_dong_khoa_hoc_co_ban
+  examples: |
+    - hoạt động của khoa học cơ bản
+    - các hoạt động ngoại khoá của khoa học cơ bản
+    - hình ảnh khoa học cơ bản
+- intent: hoc_tap_khoa_hoc_co_ban
+  examples: |
+    - học tập khoa học cơ bản
+    - hình ảnh học tập của khoa học cơ bản
+    - học sinh trong giờ học khoa học cơ bản
+    - sinh viên trong giờ học khoa học cơ bản
+- intent: doan_the
+  examples: |
+    - đoàn thể của trường
+    - cho em hỏi về đoàn thể của trường
+    - đoàn thể
+    - tổ chức đoàn thể
+- intent: cong_tac_dang
+  examples: |
+    - công tác đảng của trường
+    - cho em hỏi về công tác đảng của trường
+    - công tác đảng
+- intent: cong_tac_cong_doan
+  examples: |
+    - công tác công đoàn của trường
+    - cho em hỏi về công tác công đoàn của trường
+    - công tác công đoàn
+- intent: cong_tac_cong_doan_01
+  examples: |
+    - công đoàn có thăm hỏi tặng quà không
+    - hoạt đọng của công đoàn
+    - ốm đau có được công đoàn thăm hỏi không
+- intent: cong_tac_cong_doan_02
+  examples: |
+    - cho em hỏi về đại hội công đoàn trường
+    - đại hội công đoàn
+- intent: doan_tn_hssv
+  examples: |
+    - cho em hỏi về đoàn thanh niên
+    - cho em hỏi về đoàn thanh niên hssv
+    - cho em hỏi về đoàn thanh niên học sinh sinh viên
+    - đoàn thanh niên học sinh sinh viên
+    - đoàn thanh niên hssv
+- intent: ket_nap_doan_vien
+  examples: |
+    - cho em hỏi về kết nạp đoàn viên
+    - cho em hỏi về kết nạp đoàn
+    - kết nạp đoàn viên
+- intent: cac_hoat_dong_doan
+  examples: |
+    - cho em hỏi về các hoạt động của đoàn trường
+    - cho em hỏi về hoạt động đoàn
+    - các hoạt động đoàn
+- intent: tu_van_truc_tiep_tuyen_sinh
+  examples: |
+    - liên hệ trực tiếp ban tuyển sinh
+    - cho em số điện thoại ban tuyển sinh
+    - em muốn liên hệ với ban tuyển sinh
+- intent: tu_van_truc_tiep_to_chuc
+  examples: |
+    - liên hệ phòng tổ chức hành chính
+    - cho em số điện thoại phòng tổ chức
+    - em muốn liên hệ với phòng tổ chức
+- intent: tu_van_truc_tiep_doan_the
+  examples: |
+    - liên hệ đoàn thanh niên
+    - cho em số điện thoại đoàn thanh niên
+    - em muốn liên hệ với đoàn thanh niên
+- intent: tu_van_truc_tiep_dao_tao
+  examples: |
+    - liên hệ phòng đào tạo
+    - cho em số điện thoại phòng đào tạo
+    - em muốn liên hệ với phòng đào tạo
+- intent: tu_van_truc_tiep_cong_tac_hs_sv
+  examples: |
+    - liên hệ phòng công tác học sinh sinh viên
+    - cho em số điện thoại phòng cthssv
+    - em muốn liên hệ với phòng công tác học sinh sinh viên
+- intent: tu_van_truc_tiep_02
+  examples: |
+    - Lấy số điện thoại các phòng ban
+    - cho em số điện thoại các phòng ban
+    - em muốn liên hệ với các phòng ban
+- intent: tu_van_truc_tiep_01
+  examples: |
+    - hỗ trợ tư vấn trực tiếp
+    - em muốn hỗ trợ
+    - hỗ trợ em với
+- intent: chuan_bi_ho_so_01
+  examples: |
+    - làm thế nào để được học tại trường
+    - em muốn học tại trường
+    - em học không tốt lắm có được học tại trường không ạ
+    - cho em hỏi về tuyển sinh của trường
+- intent: chuan_bi_ho_so_02
+  examples: |
+    - hồ sơ nhập học cần những gì
+    - làm thế nào để nhập học
+    - chuổn bị những gì để nhập học
+    - chuẩn bị hồ sơ
+- intent: chuan_bi_ho_so_03
+  examples: |
+    - nhiều hồ sơ quá thầy ơi
+    - làm hết hồ sơ này ạ
+    - làm hết chỗ ngày rồi nộp ạ
+    - thầy hướng dẫn em làm hồ sơ với
+    - em không biết làm hồ sơ
+    - làm hồ sơ như thế nào
+    - thầy có hướng dẫn làm hồ sơ không
+- intent: chuan_bi_ho_so_04
+  examples: |
+    - em với bạn cùng học được không
+    - em in hồ sơ cho bạn được không
+    - giờ bạn em ở xa, em làm hồ sơ nộp hộ bạn được không
+- intent: chuan_bi_ho_so_05
+  examples: |
+    - em nộp hồ sơ cho ai Ở đâu
+    - em nhập học ở đâu Gặp ai
+- intent: chuan_bi_ho_so_06
+  examples: |
+    - em không đi nộp hồ sơ được, có cách nào để nộp hồ sơ không
+    - em nộp qua đường bưu điện có được không
+    - em nộp qua chuyển phát nhanh có được không
+    - làm thế nào không đến trường vẫn nộp được hồ sơ
+    - Em ở xa có thể nhờ người khác nộp hồ sơ xét tuyển được không
+    - Nhờ bạn nộp hồ sơ xét tuyển được không
+    - Nhờ bố mẹ nộp hồ sợ giúp được không
+    - Bạn giúp em nộp hồ sơ được không
+- intent: cac_nganh_nghe
+  examples: |
+    - Tôi muốn tìm hiểu về các ngành đào tạo của trường mình
+    - trường đào tạo những ngành học nào ạ?
+    - chỉ tiêu tuyển sinh của trường?
+    - các ngành nghề
+    - trường đào tạo những ngành nghề nào
+    - những ngành nghề trường đào tạo
+    - những ngành nghề nào có hệ Cao đẳng
+    - những ngành nghề nào có hệ Cao đẳng
+    - những ngành nghề nào có hệ Trung cấp
+    - những ngành nghề nào có hệ Sơ cấp
+    - em muốn học Điện có Cao đẳng không
+    - em muốn học Điện có Cao đẳng không
+    - em muốn học Kế toán có Cao đẳng không
+    - em muốn học Cơ khí có Cao đẳng không
+    - em muốn học Điện có Trung cấp không
+    - em muốn học Tin học có Trung cấp không
+    - em muốn học Kế toán có Trung cấp không
+    - em muốn học Cơ khí có Trung cấp không
+    - em muốn học Điện có Sơ cấp không
+    - em muốn học Tin học có Sơ cấp không
+    - em muốn học Kế toán có Sơ cấp không
+    - em muốn học Cơ khí có Sơ cấp không
+- intent: khu_KTX
+  examples: |
+    - trường có ký túc xá không
+    - ký túc xá
+    - KTX
+    - em muốn biết về ký túc xá
+- intent: KTX
+  examples: |
+    - toà nhà ký túc xá
+    - em muốn biết thêm về ký túc xá
+    - hình ảnh ký túc xá
+- intent: gioi_thieu_ktx
+  examples: |
+    - có ký túc xá không
+    - ký túc xá có đầy đủ tiện nghi không
+    - ký túc xá có sân chơi thể thao không
+    - ký túc xá có ở trong trường không
+- intent: phi_ktx
+  examples: |
+    - ở kí túc xá phải đóng bao nhiêu tiền
+    - em con thương binh, liệt sĩ có được giảm tiền không
+    - nhà em thuộc hộ cận ngèo, ngèo có được miễn, giảm tiền không
+    - nhà em thuộc vùng 135 có được giảm, miễn tiền không
+    - tiền ở ký túc xá
+    - miễn giảm tiền ở ký túc xá
+- intent: an_ninh_ve_sinh
+  examples: |  
+    - an ninh và vệ sinh ktx
+    - an ninh vệ sinh ký túc xá
+    - ký túc xá có hay bị mất đồ không
+    - ký túc xá có đánh nhau không
+    - ký túc xá có bẩn không
+    - ký túc xá có sạch sẽ không
+    - an ninh ký túc xá có tốt không
+- intent: dang_ky_ktx
+  examples: |
+    - ký túc xá còn chỗ không
+    - em muốn ở ký túc xá được không
+    - làm thế nào để em có thể ở ký túc xá
+    - nhà em ở xa em muốn xin ở ký túc xá có được không
+    - em muốn đăng ký ở ký túc xá ngay bây giờ được không
+    - em muốn đăng ký ở ký túc xá
+    - đăng ký ở ký túc xá cho em với
+- intent: huong_dan_ktx
+  examples: |
+    - em muốn ở cùng bạn có được không
+    - em muốn chọn phòng có được không
+    - em muốn ở 1 mình 1 phòng có được không
+    - em muốn ở phòng 307 có được không
+- intent: cang_tin
+  examples: |
+    - trường có căng tin không
+    - em muốn biết về căng tin
+    - em muốn ăn ở căng tin có được không
+    - muốn ăn ở căng tin thì phải làm thế nào
+    - căng tin của trường
+- intent: san_tap_the_thao
+  examples: |
+    - trường có sân tập thể thao không
+    - em muốn biết về sân tập thể thao
+    - sân tập thể thao có miễn phí không
+    - trường có sân đá bóng không
+    - có sân cầu lông không
+    - có sân bóng chuyền không
+    - có sân tenis không
+    - sân tập thể thao
+- intent: nha_khach
+  examples: |
+    - trường có nhà khách không
+    - nhà khách ai ở vậy
+    - em có được ở nhà khách không
+    - em muốn ở nhà khách của trường
+- intent: nha_hieu_bo
+  examples: |
+    - nhà hiệu bộ
+    - nhà hiệu bộ của trường
+    - nhà hiệu bộ để làm gì
+    - ai ở nhà hiệu bộ
+- intent: hieu_bo_ban_giam_hieu
+  examples: |
+    - ban giám hiệu nhà trường
+    - hiệu trưởng trường
+    - phòng hiệu trưởng
+    - phòng ban giám hiệu
+- intent: hieu_bo_phong_ban
+  examples: |
+    - các phòng ban ở đâu
+    - các phòng ban làm việc ở đâu    
+- intent: hieu_bo_cac_khoa
+  examples: |
+    - nơi làm việc của các khoa
+    - các khoa làm việc ở đâu   
+- intent: hieu_bo_hoi_truong
+  examples: |
+    - hội trường ở đâu
+    - hội trường để làm gì
+- intent: hieu_bo_truyen_thong
+  examples: |
+    - phòng truyền thống ở đâu
+    - phòng truyền thống có những gì
+    - em muốn xem phòng truyền thống
+- intent: hoc_tap_giang_duong
+  examples: |
+    - phòng học tập của trường
+    - cho em hỏi về phòng học
+    - cho em xem các phòng học của trường
+    - phòng học ở trường có đẹp không
+- intent: phong_hoc_ly_thuyet
+  examples: |
+    - cho em hỏi về phòng học lý thuyết
+    - em muốn xem phòng học lý thuyết
+    - phòng học lý thuyết
+    - phòng học lý thuyết có đẹp không
+- intent: phong_hoc_thuc_hanh
+  examples: |
+    - cho em hỏi về phòng học thực hành
+    - em muốn xem phòng học thực hành
+    - phòng học thực hành
+    - phòng học thực hành có đẹp không
+    - phòng học thực hành có đầy đủ dụng cụ thực hành không
+- intent: giang_duong
+  examples: |
+    - cho em hỏi về giảng đường
+    - em muốn xem giảng đương
+    - giảng đường
+    - giảng đường có đẹp không
+- intent: hoc_phi
+  examples: |
+    - Học phí
+    - Em muốn hỏi học phí hệ sơ cấp
+    - Em muốn hỏi học phí hệ trung cấp
+    - Em muốn hỏi học phí hệ cao đẳng
+    - Em muốn hỏi học phí các ngành nghề đào tạo
+    - Em muốn hỏi học phí điện tử
+    - Học phí học tin học
+    - Học phí học kế toán
+    - Học phí học cơ khí
+    - Học phí học công nghệ ô tô
+- intent: hp_cong_nghe_oto
+  examples: |
+    - Học phí ngành Công nghệ ô tô
+    - Học phí Công nghệ ô tô
+    - cho em hỏi học phí công nghệ ô tô
+- intent: hp_cong_nghe_oto_cd
+  examples: |
+    - Học phí ngành Công nghệ ô tô hệ cao đẳng
+    - Học phí Công nghệ ô tô cao đẳng
+- intent: hp_cong_nghe_oto_tc
+  examples: |
+    - Học phí ngành Công nghệ ô tô hệ trung cấp
+    - Học phí Công nghệ ô tô trung cấp
+- intent: hp_dien_cong_nghiep
+  examples: |
+    - Học phí ngành điện công nghiệp
+    - Học phí điện công nghiệp
+    - cho em hỏi học phí điện công nghiệp
+- intent: hp_dien_cong_nghiep_cd
+  examples: |
+    - Học phí ngành điện công nghiệp hệ cao đẳng
+    - Học phí điện công nghiệp cao đẳng
+- intent: hp_dien_cong_nghiep_tc
+  examples: |
+    - Học phí ngành điện công nghiệp hệ trung cấp
+    - Học phí điện công nghiệp trung cấp    
+- intent: hp_dien_tu_dan_dung
+  examples: |
+    - Học phí ngành điện dân dụng
+    - Học phí điện dân dụng
+    - cho em hỏi học phí điện dân dụng
+- intent: hp_dien_tu_dan_dung_cd
+  examples: |
+    - Học phí ngành điện dân dụng hệ cao đẳng
+    - Học phí điện dân dụng cao đẳng
+- intent: hp_dien_tu_dan_dung_tc
+  examples: |
+    - Học phí ngành điện dân dụng hệ trung cấp
+    - Học phí điện dân dụng trung cấp
+- intent: hp_dien_tu_dan_dung_sc
+  examples: |
+    - Học phí ngành điện dân dụng hệ sơ cấp
+    - Học phí điện dân dụng sơ cấp
+- intent: hp_han
+  examples: |
+    - Học phí ngành hàn
+    - Học phí hàn
+    - cho em hỏi học phí hàn
+- intent: hp_han_tc
+  examples: |
+    - Học phí ngành hàn hệ trung cấp
+    - Học phí hàn trung cấp
+- intent: hp_han_sc
+  examples: |
+    - Học phí ngành hàn hệ sơ cấp
+    - Học phí hàn sơ cấp
+- intent: hp_quan_tri_mang_mt
+  examples: |
+    - Học phí ngành quản trị mạng
+    - Học phí quản trị mạng
+    - cho em hỏi học phí quản trị mạng
+- intent: hp_quan_tri_mang_mt_cd
+  examples: |
+    - Học phí ngành quản trị mạng máy tính hệ cao đẳng
+    - Học phí quản trị mạng cao đẳng
+- intent: hp_quan_tri_mang_mt_tc
+  examples: |
+    - Học phí ngành quản trị mạng hệ trung cấp
+    - Học phí quản trị mạng trung cấp
+- intent: hp_tin_hoc_van_phong_sc
+  examples: |
+    - Học phí ngành tin học văn phòng hệ sơ cấp
+    - Học phí tin học văn phòng sơ cấp
+- intent: hp_huong_dan_du_lich
+  examples: |
+    - Học phí ngành hướng dẫn du lịch
+    - Học phí hướng dẫn du lịch
+    - cho em hỏi học phí hướng dẫn du lịch
+- intent: hp_huong_dan_du_lich_tc
+  examples: |
+    - Học phí ngành hướng dẫn du lịch hệ trung cấp
+    - Học phí hướng dẫn du lịch trung cấp
+- intent: hp_huong_dan_du_lich_sc
+  examples: |
+    - Học phí ngành hướng dẫn du lịch hệ sơ cấp
+    - Học phí hướng dẫn du lịch sơ cấp
+- intent: hp_ke_toan_doanh_nghiep
+  examples: |
+    - Học phí ngành kế toán doanh nghiệp
+    - Học phí kế toán doanh nghiệp
+    - cho em hỏi học phí kế toán doanh nghiệp
+- intent: hp_ke_toan_doanh_nghiep_cd
+  examples: |
+    - Học phí ngành kế toán doanh nghiệp hệ cao đẳng
+    - Học phí kế toán doanh nghiệp cao đẳng
+- intent: hp_ke_toan_doanh_nghiep_tc
+  examples: |
+    - Học phí ngành kế toán doanh nghiệp hệ trung cấp
+    - Học phí kế toán doanh nghiệp trung cấp
+- intent: hp_ke_toan_doanh_nghiep_sc
+  examples: |
+    - Học phí ngành kế toán doanh nghiệp hệ sơ cấp
+    - Học phí kế toán doanh nghiệp sơ cấp
+- intent: hp_vhm_thi_cong_nen
+  examples: |
+    - Học phí ngành vận hành máy thi công nền cao đẳng
+    - Học phí ngành vận hành máy thi công nền sơ cấp
+    - Học phí ngành vận hành máy thi công nền trung cấp
+    - Học phí vận hành máy thi công nền cao đẳng
+    - Học phí vận hành máy thi công nền sơ cấp
+    - Học phí vận hành máy thi công nền trung cấp
+    - Học phí ngành vận hành máy thi công nền
+    - Học phí hướng vận hành máy thi công nền
+    - cho em hỏi học phí hướng vận hành máy thi công nền
+- intent: tro_cap_xa_hoi
+  examples: |
+    - Em muốn hỏi về chế độ trợ cấp
+    - Đi học em có được trợ cấp gì không
+    - Chế độ trợ cấp
+    - Trợ cấp xã hội
+- intent: mien_giam_hoc_phi
+  examples: |
+    - Miễn giảm học phí
+    - Em có được miễn giảm học phí không
+    - Thuộc diện nào mới được miễn giảm học phí
+    - Bố em là liệt sỹ có được miễn giảm học phí không
+    - Bố em là thương binh có được miễn giảm học phí không
+    - Em bị khuyết tật từ bé có được miễn giảm học phí không
+    - Em bị tàn tật có được miễn giảm học phí không
+    - Em dân tộc Mường, hộ nghèo có được miễn giảm học phí không
+    - Em thuộc diện 135 có được miễn giảm học phí không
+- intent: xet_tuyen
+  examples: |
+    - Xét tuyển
+    - Trường xét tuyển như thế nào
+    - Xét tuyển thế nào vậy ạ
+- intent: xet_tuyen_01
+  examples: |
+    - Nội dung xét tuyển
+    - Xét tuyển có phải lấy điểm Cấp 3 từ cao xuống thấp không
+- intent: xet_tuyen_02
+  examples: |
+    - Khi nào mới biết kết quả xét tuyển
+    - Làm sao để biết kết quả xét tuyển
+    - Gọi cho ai, gặp ai để biết kết quả xét tuyển
+- intent: doi_tuong_uu_tien
+  examples: |
+    - cho em hỏi những ai thuộc đối tượng ưu tiên xét tuyển
+    - Đối tượng ưu tiên xét tuyển là ai
+    - Ưu tiên xét tuyển
+    - Đối tượng ưu tiên
+- intent: doi_tuong_uu_tien_02
+  examples: |
+    - Đối tượng 01
+    - Đối tượng 02
+    - Đối tượng 03
+- intent: doi_tuong_uu_tien_03
+  examples: |
+    - Đối tượng 04
+    - Đối tượng 05
+    - Đối tượng 06
+    - Đối tượng 07
+- intent: doi_tuong_uu_tien_04
+  examples: |
+    - Đối tượng 08
+    - Đối tượng 09
+    - Đối tượng 10
+- intent: khu_vuc
+  examples: |
+    - Khu vực
+    - Trường mình chỉ tuyển sinh trong tỉnh thôi ạ
+    - Em ở tỉnh khác có học được trường mình không
+    - Ở đâu thì được học trường này ạ?
+    - Diện ưu tiên khu vực là gì
+- intent: hinh_anh_nhap_hoc
+  examples: |
+    - hình ảnh nhập học
+    - hình ảnh nhập học của hssv khoá trước
+    - Em muốn xem hình ảnh nhập học
+    - Ngày nhập học thế nào
+- intent: ban_do_truong
+  examples: |
+    - em muốn đến trường nhưng không biết đường
+    - cho em biết đường tới trường
+    - bản đồ trường
+    - đi đường nào để đến trường
+- intent: huong_dan_su_dung
+  examples: |
+    - em ko biết dùng
+    - chat như thế nào
+    - hướng dẫn em sử dụng với
+    - hướng dẫn sử dụng

@@ -1,0 +1,697 @@
+version: "2.0"
+stories:
+- story: Chào hỏi.
+  steps:
+  - intent: chao_hoi
+  - action: utter_chao_hoi
+  - action: utter_huong_dan_su_dung
+- story: Hướng dẫn sử dụng
+  steps:
+  - action: utter_huong_dan_su_dung
+  - intent: xac_nhan
+  - action: utter_huong_dan_su_dung_01
+  - action: utter_huong_dan_su_dung_02
+  - action: utter_huong_dan_su_dung_03
+  - action: utter_dat_lich_tu_van_truc_tiep
+- story: Không xem Hướng dẫn sử dụng
+  steps:
+  - action: utter_huong_dan_su_dung
+  - intent: phu_nhan
+  - action: utter_huong_dan_su_dung_04
+  - action: utter_dat_lich_tu_van_truc_tiep
+- story: Đặt lịch tư vấn tuyển sinh (số điện thoại)
+  steps:
+  - intent: phone
+  - action: utter_ask_phone
+- story: Đặt lịch tư vấn tuyển sinh (họ tên)
+  steps:
+  - intent: name
+  - action: utter_ask_name
+- story: Đặt lịch tư vấn tuyển sinh (email)
+  steps:
+  - intent: email
+  - action: utter_ask_email
+- story: đặt lịch thành công
+  steps:
+  - intent: dat_lich
+  - action: newsletter_form
+  - active_loop: newsletter_form
+  - active_loop: null
+  - action: utter_dat_lich_thanh_cong
+  - action: utter_menu_chinh
+- story: Không đặt lịch tư vấn tuyển sinh
+  steps:
+  - intent: khong_dat_lich
+  - action: utter_khong_dat_lich
+  - action: utter_menu_chinh
+- story: Nói lời tạm biệt bất cứ khi nào người dùng nói tạm biệt
+  steps:
+  - intent: tam_biet
+  - action: utter_tam_biet
+- story: Nói Thầy là robot bất cứ khi nào người dùng hỏi câu phủ định.
+  steps:
+  - intent: robot
+  - action: utter_robot
+- story: Về menu chính bất cứ khi nào người dùng nói menu chính
+  steps:
+  - intent: menu_chinh
+  - action: utter_menu_chinh
+- story: Thông tin các phòng ban của trường
+  steps:
+  - intent: cac_phong_ban
+  - action: utter_cac_phong_ban
+- story: Thông tin phòng Đào tạo của trường
+  steps:
+  - intent: phong_dao_tao
+  - action: utter_phong_dao_tao
+  - action: utter_phong_dao_tao_01
+  - action: utter_phong_dao_tao_02
+  - action: utter_cac_phong_ban_end
+- story: Thông tin phòng Tổ chức hành chính của trường
+  steps:
+  - intent: phong_to_chuc
+  - action: utter_phong_to_chuc
+  - action: utter_phong_to_chuc_01
+  - action: utter_phong_to_chuc_02
+  - action: utter_cac_phong_ban_end
+- story: Thông tin phòng CTHSSV của trường
+  steps:
+  - intent: phong_CTHSSV
+  - action: utter_phong_CTHSSV
+  - action: utter_phong_CTHSSV_01
+  - action: utter_phong_CTHSSV_02
+  - action: utter_cac_phong_ban_end
+- story: Thông tin ban Tuyển sinh của trường
+  steps:
+  - intent: ban_tuyen_sinh
+  - action: utter_ban_tuyen_sinh_01
+  - action: utter_ban_tuyen_sinh_02
+  - action: utter_cac_phong_ban_end
+- story: Thông tin ban Kế hoạch của trường
+  steps:
+  - intent: ban_ke_hoach
+  - action: utter_ban_ke_hoach_01
+  - action: utter_ban_ke_hoach_02 
+  - action: utter_cac_phong_ban_end
+- story: Thông tin các khoa của trường
+  steps:
+  - intent: cac_khoa_nghe
+  - action: utter_cac_khoa_nghe
+- story: Thông tin khoa Tin học của trường
+  steps:
+  - intent: khoa_tin_hoc
+  - action: utter_khoa_tin_hoc
+  - intent: giao_vien_khoa_tin
+  - action: utter_giao_vien_khoa_tin_01
+  - action: utter_giao_vien_khoa_tin_02
+  - action: utter_cac_khoa_nghe_end
+  - intent: nhiem_vu_khoa_tin
+  - action: utter_nhiem_vu_khoa_tin_01
+  - action: utter_nhiem_vu_khoa_tin_02
+  - action: utter_cac_khoa_nghe_end
+  - intent: lien_he_khoa_tin
+  - action: utter_lien_he_khoa_tin_01
+  - action: utter_lien_he_khoa_tin_02
+  - action: utter_cac_khoa_nghe_end
+  - intent: hoat_dong_khoa_tin
+  - action: utter_hoat_dong_khoa_tin_01
+  - action: utter_hoat_dong_khoa_tin_02
+  - action: utter_hoat_dong_khoa_tin_03
+  - action: utter_hoat_dong_khoa_tin_04
+  - action: utter_hoat_dong_khoa_tin_05
+  - action: utter_cac_khoa_nghe_end
+  - intent: hoc_tap_khoa_tin
+  - action: utter_hoc_tap_khoa_tin_01
+  - action: utter_hoc_tap_khoa_tin_02
+  - action: utter_hoc_tap_khoa_tin_03
+  - action: utter_cac_khoa_nghe_end
+- story: Thông tin khoa Cơ khí của trường
+  steps:
+  - intent: khoa_co_khi
+  - action: utter_khoa_co_khi
+  - intent: giao_vien_khoa_co_khi
+  - action: utter_giao_vien_khoa_co_khi_01
+  - action: utter_giao_vien_khoa_co_khi_02
+  - action: utter_cac_khoa_nghe_end
+  - intent: nhiem_vu_khoa_co_khi
+  - action: utter_nhiem_vu_khoa_co_khi_01
+  - action: utter_nhiem_vu_khoa_co_khi_02
+  - action: utter_cac_khoa_nghe_end
+  - intent: lien_he_khoa_co_khi
+  - action: utter_lien_he_khoa_co_khi_01
+  - action: utter_lien_he_khoa_co_khi_02
+  - action: utter_cac_khoa_nghe_end
+  - intent: hoat_dong_khoa_co_khi
+  - action: utter_hoat_dong_khoa_co_khi_01
+  - action: utter_hoat_dong_khoa_co_khi_02
+  - action: utter_hoat_dong_khoa_co_khi_03
+  - action: utter_hoat_dong_khoa_co_khi_04
+  - action: utter_cac_khoa_nghe_end
+  - intent: hoc_tap_khoa_co_khi
+  - action: utter_hoc_tap_khoa_co_khi_01
+  - action: utter_hoc_tap_khoa_co_khi_02
+  - action: utter_hoc_tap_khoa_co_khi_03
+  - action: utter_cac_khoa_nghe_end
+- story: Thông tin khoa Điện-Điện tử của trường
+  steps:
+  - intent: khoa_dien_dien_tu
+  - action: utter_khoa_dien_dien_tu
+  - intent: giao_vien_khoa_dien_dien_tu
+  - action: utter_giao_vien_khoa_dien_dien_tu_01
+  - action: utter_giao_vien_khoa_dien_dien_tu_02
+  - action: utter_cac_khoa_nghe_end
+  - intent: nhiem_vu_khoa_dien_dien_tu
+  - action: utter_nhiem_vu_khoa_dien_dien_tu_01
+  - action: utter_nhiem_vu_khoa_dien_dien_tu_02
+  - action: utter_cac_khoa_nghe_end
+  - intent: lien_he_khoa_dien_dien_tu
+  - action: utter_lien_he_khoa_dien_dien_tu_01
+  - action: utter_lien_he_khoa_dien_dien_tu_02
+  - action: utter_cac_khoa_nghe_end
+  - intent: hoat_dong_khoa_dien_dien_tu
+  - action: utter_hoat_dong_khoa_dien_dien_tu_01
+  - action: utter_hoat_dong_khoa_dien_dien_tu_02
+  - action: utter_hoat_dong_khoa_dien_dien_tu_03
+  - action: utter_hoat_dong_khoa_dien_dien_tu_04
+  - action: utter_hoat_dong_khoa_dien_dien_tu_05
+  - action: utter_cac_khoa_nghe_end
+  - intent: hoc_tap_khoa_dien_dien_tu
+  - action: utter_hoc_tap_khoa_dien_dien_tu_01
+  - action: utter_hoc_tap_khoa_dien_dien_tu_02
+  - action: utter_hoc_tap_khoa_dien_dien_tu_03
+  - action: utter_hoc_tap_khoa_dien_dien_tu_04
+  - action: utter_cac_khoa_nghe_end
+- story: Thông tin khoa Kinh tế của trường
+  steps:
+  - intent: khoa_kinh_te
+  - action: utter_khoa_kinh_te
+  - intent: giao_vien_khoa_kinh_te
+  - action: utter_giao_vien_khoa_kinh_te_01
+  - action: utter_giao_vien_khoa_kinh_te_02
+  - action: utter_cac_khoa_nghe_end
+  - intent: nhiem_vu_khoa_kinh_te
+  - action: utter_nhiem_vu_khoa_kinh_te_01
+  - action: utter_nhiem_vu_khoa_kinh_te_02
+  - action: utter_cac_khoa_nghe_end
+  - intent: lien_he_khoa_kinh_te
+  - action: utter_lien_he_khoa_kinh_te_01
+  - action: utter_lien_he_khoa_kinh_te_02
+  - action: utter_cac_khoa_nghe_end
+  - intent: hoat_dong_khoa_kinh_te
+  - action: utter_hoat_dong_khoa_kinh_te_01
+  - action: utter_hoat_dong_khoa_kinh_te_02
+  - action: utter_hoat_dong_khoa_kinh_te_03
+  - action: utter_hoat_dong_khoa_kinh_te_04
+  - action: utter_hoat_dong_khoa_kinh_te_05
+  - action: utter_cac_khoa_nghe_end
+  - intent: hoc_tap_khoa_kinh_te
+  - action: utter_hoc_tap_khoa_kinh_te_01
+  - action: utter_hoc_tap_khoa_kinh_te_02
+  - action: utter_hoc_tap_khoa_kinh_te_03
+  - action: utter_cac_khoa_nghe_end
+- story: Thông tin khoa học cơ bản của trường
+  steps:
+  - intent: khoa_hoc_co_ban
+  - action: utter_khoa_hoc_co_ban
+  - intent: giao_vien_khoa_hoc_co_ban
+  - action: utter_giao_vien_khoa_hoc_co_ban_01
+  - action: utter_giao_vien_khoa_hoc_co_ban_02
+  - action: utter_cac_khoa_nghe_end
+  - intent: nhiem_vu_khoa_hoc_co_ban
+  - action: utter_nhiem_vu_khoa_hoc_co_ban_01
+  - action: utter_nhiem_vu_khoa_hoc_co_ban_02
+  - action: utter_cac_khoa_nghe_end
+  - intent: lien_he_khoa_hoc_co_ban
+  - action: utter_lien_he_khoa_hoc_co_ban_01
+  - action: utter_lien_he_khoa_hoc_co_ban_02
+  - action: utter_cac_khoa_nghe_end
+  - intent: hoat_dong_khoa_hoc_co_ban
+  - action: utter_hoat_dong_khoa_hoc_co_ban_01
+  - action: utter_hoat_dong_khoa_hoc_co_ban_02
+  - action: utter_hoat_dong_khoa_hoc_co_ban_03
+  - action: utter_hoat_dong_khoa_hoc_co_ban_04
+  - action: utter_hoat_dong_khoa_hoc_co_ban_05
+  - action: utter_cac_khoa_nghe_end
+  - intent: hoc_tap_khoa_hoc_co_ban
+  - action: utter_hoc_tap_khoa_hoc_co_ban_01
+  - action: utter_hoc_tap_khoa_hoc_co_ban_02
+  - action: utter_hoc_tap_khoa_hoc_co_ban_03
+  - action: utter_hoc_tap_khoa_hoc_co_ban_04
+  - action: utter_cac_khoa_nghe_end
+- story: Tổ chức Đoàn thể của trường
+  steps:
+  - intent: doan_the
+  - action: utter_doan_the
+- story: Công tác Đảng của trường
+  steps:
+  - intent: cong_tac_dang
+  - action: utter_cong_tac_dang
+  - action: utter_cong_tac_dang_01
+  - action: utter_cong_tac_dang_02
+  - action: utter_cong_tac_dang_03
+  - action: utter_cong_tac_dang_04
+  - action: utter_cong_tac_dang_05
+  - action: utter_doan_the_end
+- story: Công tác Công đoàn của trường
+  steps:
+  - intent: cong_tac_cong_doan
+  - action: utter_cong_tac_cong_doan  
+  - intent: cong_tac_cong_doan_01
+  - action: utter_cong_tac_cong_doan_01
+  - action: utter_doan_the_end
+  - intent: cong_tac_cong_doan_02
+  - action: utter_cong_tac_cong_doan_02
+  - action: utter_cong_tac_cong_doan_021
+  - action: utter_cong_tac_cong_doan_022
+  - action: utter_cong_tac_cong_doan_023
+  - action: utter_cong_tac_cong_doan_024
+  - action: utter_doan_the_end
+- story: Công tác Đoàn thanh niên học sinh sinh viên của trường
+  steps:
+  - intent: doan_tn_hssv
+  - action: utter_doan_tn_hssv
+  - intent: ket_nap_doan_vien
+  - action: utter_ket_nap_doan_vien
+  - action: utter_ket_nap_doan_vien_01
+  - action: utter_ket_nap_doan_vien_02
+  - action: utter_doan_the_end
+  - intent: cac_hoat_dong_doan
+  - action: utter_cac_hoat_dong_doan
+  - action: utter_cac_hoat_dong_doan_01
+  - action: utter_cac_hoat_dong_doan_02
+  - action: utter_cac_hoat_dong_doan_03
+  - action: utter_cac_hoat_dong_doan_04
+  - action: utter_cac_hoat_dong_doan_05
+  - action: utter_cac_hoat_dong_doan_06
+  - action: utter_cac_hoat_dong_doan_07
+  - action: utter_cac_hoat_dong_doan_08
+  - action: utter_doan_the_end
+- story: Số điện thoại hỗ trợ
+  steps:
+  - intent: tu_van_truc_tiep_01
+  - action: utter_tu_van_truc_tiep_01
+  - intent: tu_van_truc_tiep_02
+  - action: utter_tu_van_truc_tiep_02
+  - intent: tu_van_truc_tiep_cong_tac_hs_sv
+  - action: utter_tu_van_truc_tiep_cong_tac_hs_sv
+  - action: utter_tu_van_truc_tiep_end
+  - intent: tu_van_truc_tiep_dao_tao
+  - action: utter_tu_van_truc_tiep_dao_tao
+  - action: utter_tu_van_truc_tiep_end
+  - intent: tu_van_truc_tiep_doan_the
+  - action: utter_tu_van_truc_tiep_doan_the
+  - action: utter_tu_van_truc_tiep_end
+  - intent: tu_van_truc_tiep_to_chuc
+  - action: utter_tu_van_truc_tiep_to_chuc
+  - action: utter_tu_van_truc_tiep_end
+  - intent: tu_van_truc_tiep_tuyen_sinh
+  - action: utter_tu_van_truc_tiep_tuyen_sinh
+  - action: utter_tu_van_truc_tiep_end
+- story: Chuẩn bị hồ sơ
+  steps:
+  - intent: chuan_bi_ho_so_01
+  - action: utter_chuan_bi_ho_so_01
+- story: Hồ sơ và hướng dẫn làm hồ sơ
+  steps:
+  - intent: chuan_bi_ho_so_02
+  - action: utter_chuan_bi_ho_so_021
+  - action: utter_chuan_bi_ho_so_022
+  - action: utter_chuan_bi_ho_so_023
+  - action: utter_chuan_bi_ho_so_024
+  - action: utter_chuan_bi_ho_so_025
+  - action: utter_chuan_bi_ho_so_026
+  - action: utter_chuan_bi_ho_so_end
+- story: Những thắc mắc về hồ sơ xét tuyển
+  steps:
+  - intent: chuan_bi_ho_so_03
+  - action: utter_chuan_bi_ho_so_03
+  - action: utter_chuan_bi_ho_so_end
+  - intent: chuan_bi_ho_so_04
+  - action: utter_chuan_bi_ho_so_04
+  - action: utter_chuan_bi_ho_so_end
+  - intent: chuan_bi_ho_so_05
+  - action: utter_chuan_bi_ho_so_05
+  - action: utter_chuan_bi_ho_so_end
+  - intent: chuan_bi_ho_so_06
+  - action: utter_chuan_bi_ho_so_06
+  - action: utter_chuan_bi_ho_so_end
+  - intent: ban_do_truong
+  - action: utter_ban_do_truong
+  - action: utter_ban_do_truong_01
+  - action: utter_chuan_bi_ho_so_end
+- story: Các ngành nghề đào tạo
+  steps:
+  - intent: cac_nganh_nghe
+  - action: utter_cac_nganh_nghe_01
+  - action: utter_cac_nganh_nghe_02
+  - action: utter_cac_nganh_nghe_end
+- story: Khu ký túc xá của Trường
+  steps:
+  - intent: khu_KTX
+  - action: utter_khu_KTX
+- story: Ký túc xá
+  steps:
+  - intent: KTX
+  - action: utter_KTX
+  - intent: gioi_thieu_ktx
+  - action: utter_gioi_thieu_ktx
+  - action: utter_gioi_thieu_ktx_01
+  - action: utter_gioi_thieu_ktx_02
+  - action: utter_gioi_thieu_ktx_03
+  - action: utter_gioi_thieu_ktx_04
+  - action: utter_khu_KTX_end
+  - intent: phi_ktx
+  - action: utter_phi_ktx
+  - action: utter_phi_ktx_01
+  - action: utter_phi_ktx_02
+  - action: utter_khu_KTX_end
+  - intent: an_ninh_ve_sinh
+  - action: utter_an_ninh_ve_sinh
+  - action: utter_an_ninh_ve_sinh_01
+  - action: utter_an_ninh_ve_sinh_02
+  - action: utter_an_ninh_ve_sinh_03
+  - action: utter_an_ninh_ve_sinh_04
+  - action: utter_an_ninh_ve_sinh_05
+  - action: utter_an_ninh_ve_sinh_06
+  - action: utter_khu_KTX_end
+  - intent: dang_ky_ktx
+  - action: utter_dang_ky_ktx
+  - action: utter_khu_KTX_end
+  - intent: huong_dan_ktx
+  - action: utter_huong_dan_ktx
+  - action: utter_khu_KTX_end
+- story: Căng tin
+  steps:
+  - intent: cang_tin
+  - action: utter_cang_tin
+  - action: utter_cang_tin_01
+  - action: utter_cang_tin_02
+  - action: utter_cang_tin_03
+  - action: utter_cang_tin_04
+  - action: utter_cang_tin_05
+  - action: utter_khu_KTX_end
+- story: Sân tập thể thao
+  steps:
+  - intent: san_tap_the_thao
+  - action: utter_san_tap_the_thao
+  - action: utter_san_tap_the_thao_01
+  - action: utter_san_tap_the_thao_02
+  - action: utter_san_tap_the_thao_03
+  - action: utter_san_tap_the_thao_04
+  - action: utter_san_tap_the_thao_05
+  - action: utter_san_tap_the_thao_06
+  - action: utter_khu_KTX_end
+- story: Nhà khách
+  steps:
+  - intent: nha_khach
+  - action: utter_nha_khach
+  - action: utter_nha_khach_01
+  - action: utter_khu_KTX_end
+- story: Toà nhà hiệu bộ
+  steps:
+  - intent: nha_hieu_bo
+  - action: utter_nha_hieu_bo
+  - intent: hieu_bo_ban_giam_hieu
+  - action: utter_hieu_bo_ban_giam_hieu
+  - action: utter_nha_hieu_bo_end
+  - intent: hieu_bo_phong_ban
+  - action: utter_hieu_bo_phong_ban
+  - action: utter_nha_hieu_bo_end
+  - intent: hieu_bo_cac_khoa
+  - action: utter_hieu_bo_cac_khoa
+  - action: utter_nha_hieu_bo_end
+  - intent: hieu_bo_hoi_truong
+  - action: utter_hieu_bo_hoi_truong
+  - action: utter_nha_hieu_bo_end
+  - intent: hieu_bo_truyen_thong
+  - action: utter_hieu_bo_truyen_thong
+  - action: utter_nha_hieu_bo_end
+- story: Học tập và giảng đường
+  steps:
+  - intent: hoc_tap_giang_duong
+  - action: utter_hoc_tap_giang_duong
+  - intent: phong_hoc_ly_thuyet
+  - action: utter_phong_hoc_ly_thuyet
+  - action: utter_phong_hoc_ly_thuyet_01
+  - action: utter_hoc_tap_giang_duong_end
+  - intent: phong_hoc_thuc_hanh
+  - action: utter_phong_hoc_thuc_hanh
+  - action: utter_phong_hoc_thuc_hanh_01
+  - action: utter_hoc_tap_giang_duong_end
+  - intent: giang_duong
+  - action: utter_giang_duong
+  - action: utter_giang_duong_01
+  - action: utter_hoc_tap_giang_duong_end
+- story: Học phí các ngành nghề
+  steps:
+  - intent: hoc_phi
+  - action: utter_hoc_phi
+  - intent: hp_cong_nghe_oto
+  - action: utter_hp_cong_nghe_oto
+  - intent: hp_cong_nghe_oto_cd
+  - action: utter_hp_cong_nghe_oto_cd
+  - action: utter_hoc_phi_end
+  - intent: hp_cong_nghe_oto_tc
+  - action: utter_hp_cong_nghe_oto_tc  
+  - action: utter_hoc_phi_end
+  - intent: hp_dien_cong_nghiep
+  - action: utter_hp_dien_cong_nghiep
+  - intent: hp_dien_cong_nghiep_cd
+  - action: utter_hp_dien_cong_nghiep_cd
+  - action: utter_hoc_phi_end
+  - intent: hp_dien_cong_nghiep_tc
+  - action: utter_hp_dien_cong_nghiep_tc
+  - action: utter_hoc_phi_end
+  - intent: hp_dien_tu_dan_dung
+  - action: utter_hp_dien_tu_dan_dung
+  - intent: hp_dien_tu_dan_dung_cd
+  - action: utter_hp_dien_tu_dan_dung_cd
+  - action: utter_hoc_phi_end
+  - intent: hp_dien_tu_dan_dung_tc
+  - action: utter_hp_dien_tu_dan_dung_tc
+  - action: utter_hoc_phi_end
+  - intent: hp_dien_tu_dan_dung_sc
+  - action: utter_hp_dien_tu_dan_dung_sc
+  - action: utter_hoc_phi_end
+  - intent: hp_han
+  - action: utter_hp_han
+  - intent: hp_han_tc
+  - action: utter_hp_han_tc
+  - action: utter_hoc_phi_end
+  - intent: hp_han_sc
+  - action: utter_hp_han_sc
+  - action: utter_hoc_phi_end
+  - intent: hp_quan_tri_mang_mt
+  - action: utter_hp_quan_tri_mang_mt
+  - intent: hp_quan_tri_mang_mt_cd
+  - action: utter_hp_quan_tri_mang_mt_cd
+  - action: utter_hoc_phi_end
+  - intent: hp_quan_tri_mang_mt_tc
+  - action: utter_hp_quan_tri_mang_mt_tc
+  - action: utter_hoc_phi_end
+  - intent: hp_tin_hoc_van_phong_sc
+  - action: utter_hp_tin_hoc_van_phong_sc
+  - action: utter_hoc_phi_end
+  - intent: hp_huong_dan_du_lich
+  - action: utter_hp_huong_dan_du_lich
+  - intent: hp_huong_dan_du_lich_tc
+  - action: utter_hp_huong_dan_du_lich_tc
+  - action: utter_hoc_phi_end
+  - intent: hp_huong_dan_du_lich_sc
+  - action: utter_hp_huong_dan_du_lich_sc
+  - action: utter_hoc_phi_end
+  - intent: hp_ke_toan_doanh_nghiep
+  - action: utter_hp_ke_toan_doanh_nghiep
+  - intent: hp_ke_toan_doanh_nghiep_cd
+  - action: utter_hp_ke_toan_doanh_nghiep_cd
+  - action: utter_hoc_phi_end
+  - intent: hp_ke_toan_doanh_nghiep_tc
+  - action: utter_hp_ke_toan_doanh_nghiep_tc
+  - action: utter_hoc_phi_end
+  - intent: hp_ke_toan_doanh_nghiep_sc
+  - action: utter_hp_ke_toan_doanh_nghiep_sc
+  - action: utter_hoc_phi_end
+  - intent: hp_vhm_thi_cong_nen
+  - action: utter_hp_vhm_thi_cong_nen
+  - action: utter_hoc_phi_end
+- story: Chế độ trợ cấp Xã Hội 01
+  steps:
+  - action: utter_tro_cap_xa_hoi_01
+  - intent: xac_nhan
+  - action: utter_tro_cap_xa_hoi_06
+  - action: utter_tro_cap_xa_hoi_end
+- story: Chế độ trợ cấp Xã Hội 02
+  steps:
+  - action: utter_tro_cap_xa_hoi_02
+  - intent: xac_nhan
+  - action: utter_tro_cap_xa_hoi_07
+  - action: utter_tro_cap_xa_hoi_end
+- story: Chế độ trợ cấp Xã Hội 03
+  steps:
+  - action: utter_tro_cap_xa_hoi_03
+  - intent: xac_nhan
+  - action: utter_tro_cap_xa_hoi_07
+  - action: utter_tro_cap_xa_hoi_end
+- story: Chế độ trợ cấp Xã Hội 04
+  steps:
+  - action: utter_tro_cap_xa_hoi_04
+  - intent: xac_nhan
+  - action: utter_tro_cap_xa_hoi_07
+  - action: utter_tro_cap_xa_hoi_end
+- story: Chế độ trợ cấp Xã Hội 05
+  steps:
+  - action: utter_tro_cap_xa_hoi_05
+  - intent: xac_nhan
+  - action: utter_tro_cap_xa_hoi_07  
+  - action: utter_tro_cap_xa_hoi_end
+- story: Chế độ trợ cấp Xã Hội 06
+  steps:
+  - intent: tro_cap_xa_hoi
+  - action: utter_tro_cap_xa_hoi
+  - action: utter_tro_cap_xa_hoi_01
+  - intent: phu_nhan
+  - action: utter_tro_cap_xa_hoi_02 
+  - intent: phu_nhan
+  - action: utter_tro_cap_xa_hoi_03
+  - intent: phu_nhan
+  - action: utter_tro_cap_xa_hoi_04
+  - intent: phu_nhan
+  - action: utter_tro_cap_xa_hoi_05
+  - intent: phu_nhan
+  - action: utter_tro_cap_xa_hoi_08
+  - action: utter_tro_cap_xa_hoi_end
+- story: Miễn giảm học phí 01
+  steps:
+  - action: utter_mien_giam_hoc_phi_01
+  - intent: xac_nhan
+  - action: utter_mien_giam_hoc_phi_08
+  - action: utter_mien_giam_hoc_phi_end
+- story: Miễn giảm học phí 02
+  steps:
+  - action: utter_mien_giam_hoc_phi_02
+  - intent: xac_nhan
+  - action: utter_mien_giam_hoc_phi_08
+  - action: utter_mien_giam_hoc_phi_end
+- story: Miễn giảm học phí 03
+  steps:
+  - action: utter_mien_giam_hoc_phi_03
+  - intent: xac_nhan
+  - action: utter_mien_giam_hoc_phi_08
+  - action: utter_mien_giam_hoc_phi_end
+- story: Miễn giảm học phí 04
+  steps:
+  - action: utter_mien_giam_hoc_phi_04
+  - intent: xac_nhan
+  - action: utter_mien_giam_hoc_phi_08
+  - action: utter_mien_giam_hoc_phi_end
+- story: Miễn giảm học phí 05
+  steps:
+  - action: utter_mien_giam_hoc_phi_05
+  - intent: xac_nhan
+  - action: utter_mien_giam_hoc_phi_08
+  - action: utter_mien_giam_hoc_phi_end
+- story: Miễn giảm học phí 06
+  steps:
+  - action: utter_mien_giam_hoc_phi_06
+  - intent: xac_nhan
+  - action: utter_mien_giam_hoc_phi_09
+  - action: utter_mien_giam_hoc_phi_end
+- story: Miễn giảm học phí 07
+  steps:
+  - action: utter_mien_giam_hoc_phi_07
+  - intent: xac_nhan
+  - action: utter_mien_giam_hoc_phi_10
+  - action: utter_mien_giam_hoc_phi_end   
+- story: Miễn giảm học phí 08
+  steps:
+  - intent: mien_giam_hoc_phi
+  - action: utter_mien_giam_hoc_phi
+  - action: utter_mien_giam_hoc_phi_01
+  - intent: phu_nhan
+  - action: utter_mien_giam_hoc_phi_02 
+  - intent: phu_nhan
+  - action: utter_mien_giam_hoc_phi_03
+  - intent: phu_nhan
+  - action: utter_mien_giam_hoc_phi_04
+  - intent: phu_nhan
+  - action: utter_mien_giam_hoc_phi_05
+  - intent: phu_nhan
+  - action: utter_mien_giam_hoc_phi_06
+  - intent: phu_nhan
+  - action: utter_mien_giam_hoc_phi_07
+  - intent: phu_nhan
+  - action: utter_mien_giam_hoc_phi_11
+  - action: utter_mien_giam_hoc_phi_end
+- story: Xét tuyển hồ sơ Học sinh Sinh viên
+  steps:
+  - intent: xet_tuyen
+  - action: utter_xet_tuyen
+- story: Xét tuyển hồ sơ Học sinh Sinh viên 01
+  steps: 
+  - intent: xet_tuyen_01
+  - action: utter_xet_tuyen_01
+  - action: utter_hinh_anh_nhap_hoc_end
+  - intent: xet_tuyen_02
+  - action: utter_xet_tuyen_02
+  - action: utter_hinh_anh_nhap_hoc_end
+- story: Hình ảnh nhập học
+  steps:
+  - intent: hinh_anh_nhap_hoc
+  - action: utter_hinh_anh_nhap_hoc
+  - action: utter_hinh_anh_nhap_hoc_01
+  - action: utter_hinh_anh_nhap_hoc_02
+  - action: utter_hinh_anh_nhap_hoc_03
+  - action: utter_hinh_anh_nhap_hoc_04
+  - action: utter_hinh_anh_nhap_hoc_end
+- story: Đối tượng ưu tiên xét tuyển
+  steps:
+  - intent: doi_tuong_uu_tien
+  - action: utter_doi_tuong_uu_tien
+  - action: utter_doi_tuong_uu_tien_01
+  - intent: doi_tuong_uu_tien_02
+  - action: utter_doi_tuong_uu_tien_02
+  - action: utter_doi_tuong_uu_tien_end
+  - intent: doi_tuong_uu_tien_03
+  - action: utter_doi_tuong_uu_tien_03
+  - action: utter_doi_tuong_uu_tien_end
+  - intent: doi_tuong_uu_tien_04
+  - action: utter_doi_tuong_uu_tien_04
+  - action: utter_doi_tuong_uu_tien_end
+- story: Đối tượng ưu tiên theo khu vực 01
+  steps:
+  - action: utter_khu_vuc_01
+  - intent: xac_nhan
+  - action: utter_khu_vuc_05
+  - action: utter_khu_vuc_end
+- story: Đối tượng ưu tiên theo khu vực 02
+  steps:
+  - action: utter_khu_vuc_02
+  - intent: xac_nhan
+  - action: utter_khu_vuc_07
+  - action: utter_khu_vuc_end
+- story: Đối tượng ưu tiên theo khu vực 03
+  steps:
+  - action: utter_khu_vuc_03
+  - intent: xac_nhan
+  - action:  utter_khu_vuc_09
+  - action: utter_khu_vuc_end
+- story: Đối tượng ưu tiên theo khu vực 04
+  steps:
+  - action: utter_khu_vuc_04
+  - intent: xac_nhan
+  - action: utter_khu_vuc_06
+  - action: utter_khu_vuc_end
+- story: Đối tượng ưu tiên theo khu vực 06
+  steps:
+  - intent: khu_vuc
+  - action: utter_khu_vuc
+  - action: utter_khu_vuc_01
+  - intent: phu_nhan
+  - action: utter_khu_vuc_02
+  - intent: phu_nhan
+  - action: utter_khu_vuc_03
+  - intent: phu_nhan
+  - action: utter_khu_vuc_04
+  - intent: phu_nhan
+  - action: utter_khu_vuc_08
+  - action: utter_khu_vuc_end

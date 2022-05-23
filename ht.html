@@ -1,19 +1,37 @@
 <html>
+
 <head>
-  <title>WYSIWYG editor với nicEditor</title>  
-<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
-  <script type="text/javascript">
-  bkLib.onDomLoaded(function() {
-        new nicEditor({maxHeight : 200}).panelInstance('area');
-  });
-  </script>
+  <title>WYSIWYG editor với nicEditor</title>
+  
 </head>
+
 <body>
-<div id="sample">
-  <h4>Simple textarea</h4>  
-  <textarea name="area" id="area" style="width:70%;height:200px;">
-      Đây là nội dung
-  </textarea>
-</div>
+  <div id="sample">
+    <!-- Messenger Plugin chat Code -->
+    <div id="fb-root"></div>
+    <!-- Your Plugin chat code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "108842094775849");
+      chatbox.setAttribute("attribution", "biz_inbox");
+      window.fbAsyncInit = function () {
+        FB.init({
+          xfbml: true,
+          version: 'v11.0'
+        });
+      };
+      (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+  </div>
 </body>
+
 </html>

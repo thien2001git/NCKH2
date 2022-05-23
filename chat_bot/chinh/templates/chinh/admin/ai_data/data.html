@@ -75,6 +75,7 @@
     <!-- form add csv -->
     <form action="#" method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <input type="hidden" name="kieu" value="file">
         <!-- lưu ý nhỏ -->
         <h3>Lưu ý</h3>
         <ol>
@@ -90,16 +91,18 @@
                 </td>
                 <!-- thông báo khi sai -->
                 {% if mess %}
+            <tr>
                 <td colspan="2">
                     <div>{{mess}}</div>
                 </td>
+            </tr>
 
-                <script>
-                    // ẩn bảng, hiện from thêm
-                    st = 1;
+            <script>
+                // ẩn bảng, hiện from thêm
+                st = 1;
 
-                </script>
-                {% endif %}
+            </script>
+            {% endif %}
             </tr>
             <tr>
                 <!-- nút cơ bản -->
@@ -116,12 +119,17 @@
     <!-- form add csv -->
     <form action="#" method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <input type="hidden" name="kieu" value="one">
         <table class="table">
             <tr>
                 <th><label for="loai">Loại câu</label></th>
                 <td>
                     <select name="loai" id="loai">
-                        <option value=""></option>
+                        {% if label%}
+                        {% for i in label %}
+                        <option value="{{i.value}}">{{ i.nm }}</option>
+                        {% endfor %}
+                        {% endif %}
                     </select>
                 </td>
             </tr>
@@ -133,16 +141,21 @@
                 </td>
                 <!-- thông báo khi sai -->
                 {% if mess %}
+            <tr>
                 <td colspan="2">
                     <div>{{mess}}</div>
                 </td>
+            </tr>
+            <script>
+                // ẩn bảng, hiện from thêm
+                if (st != 1 && st != 0) {
+                    st = 2;
+                }
 
-                <script>
-                    // ẩn bảng, hiện from thêm
-                    st = 1;
 
-                </script>
-                {% endif %}
+
+            </script>
+            {% endif %}
             </tr>
 
             <tr>
@@ -160,6 +173,12 @@
     if (st == 0) {
         show_hide([], ["#add_one_form", "#add_csv_form"])
     }
+    if (st == 1) {
+        show_hide(["#add_csv_form"], ["#add_one_form", "#tbl-show"])
+    }
+    if (st == 2) {
+        show_hide(["#add_one_form"], ["#add_csv_form", "#tbl-show"])
+    }
     // nếu ấn nút thêm sẽ ẩn bảng
     $("#add_csv").click(function (ev) {
         show_hide(["#add_csv_form"], ["#add_one_form", "#tbl-show"])
@@ -167,5 +186,9 @@
     $("#add_one").click(function (ev) {
         show_hide(["#add_one_form"], ["#add_csv_form", "#tbl-show"])
     })
+
+
+
+
 </script>
 {% endblock %}

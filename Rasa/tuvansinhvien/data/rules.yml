@@ -1,0 +1,18 @@
+version: "2.0"
+rules: 
+- rule: Nói tạm biệt bất cứ khi nào người dùng nói tạm biệt.
+  steps:
+  - intent: tam_biet
+  - action: utter_tam_biet
+- rule: Nói Thầy là robot chuyên tư vấn tuyển sinh của Trường bất cứ khi nào người dùng nói robot
+  steps:
+  - intent: robot
+  - action: utter_robot
+- rule: Về menu chính bất cứ khi nào người dùng nói menu chính
+  steps:
+  - intent: menu_chinh
+  - action: utter_menu_chinh
+- rule: Yêu cầu người dùng diễn đạt lại bất cứ khi nào họ gửi tin nhắn với độ tin cậy thấp của NLU
+  steps:
+  - intent: nlu_fallback
+  - action: utter_please_rephrase

@@ -1,0 +1,75 @@
+version: "2.0"
+stories:
+- story: Kiểm tra câu chuyện chào hỏi và hướng dẫn sử dụng. (.\tests\test_stories.yml)
+  steps:
+  - intent: chao_hoi
+  - action: utter_chao_hoi
+  - action: utter_huong_dan_su_dung
+  - intent: xac_nhan  # predicted: nlu_fallback: xac_nhan
+  - action: utter_huong_dan_su_dung_01
+  - action: utter_huong_dan_su_dung_02
+  - action: utter_huong_dan_su_dung_03
+  - action: utter_dat_lich_tu_van_truc_tiep
+  - user: |-
+      phu_nhan
+  - action: utter_huong_dan_su_dung  # predicted: utter_hinh_anh_nhap_hoc_end
+  - intent: phu_nhan
+  - action: utter_huong_dan_su_dung_04
+  - action: utter_dat_lich_tu_van_truc_tiep
+- story: happy path 2 (.\tests\test_stories.yml)
+  steps:
+  - intent: greet  # predicted: chao_hoi: hello there!
+  - action: utter_greet  # predicted: action_default_fallback
+  - action: action_listen  # predicted: action_default_fallback
+  - intent: mood_great  # predicted: nlu_fallback: amazing
+  - action: utter_happy  # predicted: action_default_fallback
+  - action: action_listen  # predicted: utter_cang_tin_05
+  - intent: goodbye  # predicted: tam_biet: bye-bye!
+  - action: utter_goodbye  # predicted: action_default_fallback
+  - action: action_listen  # predicted: utter_cang_tin_05
+- story: sad path 1 (.\tests\test_stories.yml)
+  steps:
+  - intent: greet  # predicted: chao_hoi: hello
+  - action: utter_greet  # predicted: action_default_fallback
+  - action: action_listen  # predicted: action_default_fallback
+  - intent: mood_unhappy  # predicted: nlu_fallback: not good
+  - action: utter_cheer_up  # predicted: action_default_fallback
+  - action: utter_did_that_help  # predicted: utter_cang_tin_05
+  - action: action_listen  # predicted: utter_cang_tin_05
+  - intent: affirm  # predicted: xac_nhan: yes
+  - action: utter_happy  # predicted: action_default_fallback
+  - action: action_listen  # predicted: utter_cang_tin_05
+- story: sad path 2 (.\tests\test_stories.yml)
+  steps:
+  - intent: greet  # predicted: chao_hoi: hello
+  - action: utter_greet  # predicted: action_default_fallback
+  - action: action_listen  # predicted: action_default_fallback
+  - intent: mood_unhappy  # predicted: nlu_fallback: not good
+  - action: utter_cheer_up  # predicted: action_default_fallback
+  - action: utter_did_that_help  # predicted: utter_cang_tin_05
+  - action: action_listen  # predicted: utter_cang_tin_05
+  - intent: deny  # predicted: nlu_fallback: not really
+  - action: utter_goodbye  # predicted: action_default_fallback
+  - action: action_listen  # predicted: utter_cang_tin_05
+- story: sad path 3 (.\tests\test_stories.yml)
+  steps:
+  - intent: greet  # predicted: chao_hoi: hi
+  - action: utter_greet  # predicted: action_default_fallback
+  - action: action_listen  # predicted: action_default_fallback
+  - intent: mood_unhappy  # predicted: nlu_fallback: very terrible
+  - action: utter_cheer_up  # predicted: action_default_fallback
+  - action: utter_did_that_help  # predicted: utter_cang_tin_05
+  - action: action_listen  # predicted: utter_cang_tin_05
+  - intent: deny  # predicted: nlu_fallback: no
+  - action: utter_goodbye  # predicted: action_default_fallback
+  - action: action_listen  # predicted: utter_cang_tin_05
+- story: say goodbye (.\tests\test_stories.yml)
+  steps:
+  - intent: goodbye  # predicted: tam_biet: bye-bye!
+  - action: utter_goodbye  # predicted: action_default_fallback
+  - action: action_listen  # predicted: action_default_fallback
+- story: bot challenge (.\tests\test_stories.yml)
+  steps:
+  - intent: bot_challenge  # predicted: nlu_fallback: are you a bot?
+  - action: utter_iamabot  # predicted: action_default_fallback
+  - action: action_listen  # predicted: action_default_fallback

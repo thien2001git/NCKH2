@@ -1,3 +1,5 @@
 {% for %} {% endblock %}
 {% for %} {% endfor %}
 {% if %} {% endif %}
+python –m pip install –U virtualenv
+virtualenv detai
